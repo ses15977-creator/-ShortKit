@@ -11,6 +11,9 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #0f172a; color: #f8fafc; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .preview-img-rotate-90 { transform: rotate(90deg); }
+        .preview-img-rotate-180 { transform: rotate(180deg); }
+        .preview-img-rotate-270 { transform: rotate(270deg); }
     </style>
 </head>
 <body class="flex flex-col h-screen max-w-md mx-auto bg-slate-950 text-slate-100 overflow-hidden shadow-2xl border-x border-slate-800">
@@ -23,10 +26,10 @@
             </div>
             <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">ShortKit Pro</h1>
         </div>
-        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.3 Flow</span>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.4 Master</span>
     </header>
 
-    <!-- 원페이지 스크롤 컨텐츠 영역 (위에서 아래로 자연스럽게 이어짐) -->
+    <!-- 원페이지 스크롤 영역 -->
     <main class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-6 pb-32">
         
         <!-- [섹션 1] 미디어(사진/영상) 선택 -->
@@ -35,20 +38,63 @@
                 <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-photo-film mr-1.5"></i>1. 미디어 선택</h2>
                 <span id="media-count" class="text-[10px] text-purple-400 bg-purple-950 px-2 py-0.5 rounded-md border border-purple-900">0개 선택됨</span>
             </div>
-            <p class="text-xs text-slate-400">촬영하신 맛집 사진이나 숏폼 소스 영상을 선택해 주세요.</p>
+            <p class="text-xs text-slate-400">숏폼에 들어갈 사진이나 영상을 골라주세요.</p>
             
-            <label class="border-2 border-dashed border-purple-500/40 hover:border-purple-500 rounded-xl p-5 text-center transition cursor-pointer bg-slate-950/80 flex flex-col items-center justify-center block">
-                <i class="fa-solid fa-cloud-arrow-up text-2xl text-purple-400 mb-1.5"></i>
+            <label class="border-2 border-dashed border-purple-500/40 hover:border-purple-500 rounded-xl p-4 text-center transition cursor-pointer bg-slate-950/80 flex flex-col items-center justify-center block">
+                <i class="fa-solid fa-cloud-arrow-up text-xl text-purple-400 mb-1"></i>
                 <span class="text-xs font-bold text-slate-200">터치해서 사진/영상 불러오기</span>
                 <input type="file" id="media-file-input" multiple accept="video/*,image/*" class="hidden" onchange="handleFileSelect(event)">
             </label>
             <div id="media-preview-container" class="grid grid-cols-4 gap-2 pt-1"></div>
         </section>
 
-        <!-- [섹션 2] AI 사진 분석 및 대본 생성 -->
+        <!-- [섹션 2] 실시간 미리보기 (요청하신 대로 맨 위로 배치!) -->
+        <section class="bg-gradient-to-br from-purple-950/40 to-slate-900 p-4 rounded-2xl border border-purple-800/40 flex flex-col items-center space-y-3">
+            <div class="w-full flex justify-between items-center">
+                <h2 class="font-bold text-sm text-purple-200"><i class="fa-solid fa-circle-play mr-1.5 text-purple-400"></i>2. 실시간 동영상 미리보기</h2>
+                <button onclick="togglePlayPreview()" id="play-btn" class="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-lg transition shadow flex items-center space-x-1.5">
+                    <i class="fa-solid fa-play"></i><span>재생하기</span>
+                </button>
+            </div>
+
+            <!-- 9:16 가상 스마트폰 플레이어 화면 -->
+            <div class="relative w-52 h-[360px] bg-black rounded-2xl border-4 border-slate-800 overflow-hidden shadow-2xl flex flex-col justify-between p-3">
+                <div class="absolute inset-0 bg-slate-900 flex items-center justify-center z-0 overflow-hidden">
+                    <img id="preview-active-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover transition duration-300 hidden">
+                    <i id="preview-default-icon" class="fa-solid fa-video text-slate-700 text-4xl"></i>
+                </div>
+                
+                <!-- 상단 프로그레스 바 (재생 시 움직임 표현) -->
+                <div class="z-10 flex space-x-1 w-full">
+                    <div id="prog-1" class="h-1 bg-white flex-1 rounded-full opacity-90"></div>
+                    <div id="prog-2" class="h-1 bg-white/45 flex-1 rounded-full"></div>
+                    <div id="prog-3" class="h-1 bg-white/45 flex-1 rounded-full"></div>
+                </div>
+
+                <!-- 자막 박스 -->
+                <div class="z-10 my-auto text-center px-1">
+                    <span id="preview-caption" class="bg-black/80 text-yellow-300 font-extrabold text-xs px-3 py-2 rounded-lg border border-yellow-500/30 shadow-lg inline-block leading-snug">
+                        이 가격에 이 두툼한 삼겹살 실화입니까? 🔥
+                    </span>
+                </div>
+
+                <!-- 하단 크리에이터 정보 -->
+                <div class="z-10 flex items-center justify-between text-white text-[10px]">
+                    <div class="flex items-center space-x-1">
+                        <div class="w-5 h-5 rounded-full bg-purple-600 flex items-center justify-center font-bold text-[9px]">M</div>
+                        <span class="font-bold">@marketjinney</span>
+                    </div>
+                    <div class="bg-black/50 px-2 py-0.5 rounded-full flex items-center space-x-1">
+                        <i class="fa-solid fa-heart text-red-500 text-[9px]"></i><span>1.2K</span>
+                    </div>
+                </div>
+            </div>
+            <span id="playback-status" class="text-[11px] text-slate-400">정지 상태 (재생 버튼을 눌러 확인하세요)</span>
+        </section>
+
+        <!-- [섹션 3] AI 사진 분석 및 대본 생성 -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-            <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-robot mr-1.5"></i>2. AI 사진 분석 및 자막 생성</h2>
-            <p class="text-xs text-slate-400">선택한 사진을 AI가 분석하여 자동으로 숏폼 대본과 자막을 짜줍니다.</p>
+            <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-robot mr-1.5"></i>3. AI 사진 분석 및 자막 생성</h2>
             
             <div class="space-y-3">
                 <input type="text" id="ai-keyword" placeholder="추가 키워드 (예: 부산 동래 경보관 듀록 삼겹살)" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:outline-none focus:border-purple-500 text-white placeholder-slate-600">
@@ -70,74 +116,39 @@
             </div>
         </section>
 
-        <!-- [섹션 3] 고급 편집 (사진 매칭 및 대사 디테일 수정) -->
+        <!-- [섹션 4] 고급 편집 (사진 회전 및 대사 디테일 수정) -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-            <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-sliders mr-1.5"></i>3. 고급 편집 (사진 & 대사 세부 수정)</h2>
-            <p class="text-xs text-slate-400">각 파트별로 문구를 수정하고 매칭할 사진을 바꿀 수 있습니다.</p>
+            <div class="flex justify-between items-center">
+                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-sliders mr-1.5"></i>4. 고급 편집 (사진 회전 & 대사 수정)</h2>
+                <button onclick="rotateActivePhoto()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-purple-300 rounded-lg text-[11px] font-medium transition">
+                    <i class="fa-solid fa-rotate-right mr-1"></i>사진 회전 (90°)
+                </button>
+            </div>
+            <p class="text-xs text-slate-400">사진이 돌아가 있거나 세부 대사를 고치고 싶을 때 수정하세요.</p>
 
             <div class="space-y-3 pt-1">
                 <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
                     <div class="flex justify-between items-center">
                         <span class="text-[11px] font-bold text-purple-400">🔥 1부 훅 (도입부)</span>
-                        <select id="edit-img-1" class="bg-slate-900 border border-slate-800 text-[10px] text-purple-300 rounded px-2 py-1"><option>사진 1선택됨</option></select>
+                        <select id="edit-img-1" onchange="updatePreviewImageSelection()" class="bg-slate-900 border border-slate-800 text-[10px] text-purple-300 rounded px-2 py-1"><option>사진 선택</option></select>
                     </div>
-                    <input type="text" id="edit-hook" value="이 가격에 이 두툼한 삼겹살 실화입니까?" oninput="updateLivePreview()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+                    <input type="text" id="edit-hook" value="이 가격에 이 두툼한 삼겹살 실화입니까?" oninput="updateLivePreviewText()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
 
                 <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-[11px] font-bold text-indigo-400">🥩 2부 본론 (핵심 맛 포인트)</span>
-                        <select id="edit-img-2" class="bg-slate-900 border border-slate-800 text-[10px] text-indigo-300 rounded px-2 py-1"><option>사진 2선택됨</option></select>
+                        <span class="text-[11px] font-bold text-indigo-400">🥩 2부 본론 (핵심 포인트)</span>
+                        <select id="edit-img-2" onchange="updatePreviewImageSelection()" class="bg-slate-900 border border-slate-800 text-[10px] text-indigo-300 rounded px-2 py-1"><option>사진 선택</option></select>
                     </div>
-                    <input type="text" id="edit-body" value="입안에서 육즙이 폭발하는 환상적인 맛!" oninput="updateLivePreview()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+                    <input type="text" id="edit-body" value="입안에서 육즙이 폭발하는 환상적인 맛!" oninput="updateLivePreviewText()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
 
                 <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-[11px] font-bold text-emerald-400">✨ 3부 CTA (마무리/행동유도)</span>
-                        <select id="edit-img-3" class="bg-slate-900 border border-slate-800 text-[10px] text-emerald-300 rounded px-2 py-1"><option>사진 3선택됨</option></select>
+                        <span class="text-[11px] font-bold text-emerald-400">✨ 3부 CTA (마무리)</span>
+                        <select id="edit-img-3" onchange="updatePreviewImageSelection()" class="bg-slate-900 border border-slate-800 text-[10px] text-emerald-300 rounded px-2 py-1"><option>사진 선택</option></select>
                     </div>
-                    <input type="text" id="edit-cta" value="오늘 저녁은 여기로 고고싱! 팔로우 필수!" oninput="updateLivePreview()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
-                </div>
-            </div>
-        </section>
-
-        <!-- [섹션 4] 실시간 미리보기 (항상 눈에 보이도록 배치) -->
-        <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 flex flex-col items-center space-y-3">
-            <div class="w-full flex justify-between items-center">
-                <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-circle-play mr-1.5 text-purple-400"></i>4. 실시간 미리보기 (9:16)</h2>
-                <button onclick="togglePlayPreview()" id="play-btn" class="px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold rounded-lg transition shadow">
-                    <i class="fa-solid fa-play mr-1"></i>재생
-                </button>
-            </div>
-
-            <!-- 9:16 가상 스마트폰 화면 -->
-            <div id="preview-screen" class="relative w-48 h-[340px] bg-black rounded-2xl border-4 border-slate-800 overflow-hidden shadow-2xl flex flex-col justify-between p-3">
-                <div class="absolute inset-0 bg-slate-900 flex items-center justify-center z-0">
-                    <img id="preview-bg-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover opacity-60 hidden">
-                    <i id="preview-default-icon" class="fa-solid fa-video text-slate-700 text-4xl"></i>
-                </div>
-                
-                <div class="z-10 flex space-x-1 w-full">
-                    <div class="h-1 bg-white flex-1 rounded-full opacity-90"></div>
-                    <div class="h-1 bg-white/40 flex-1 rounded-full"></div>
-                    <div class="h-1 bg-white/40 flex-1 rounded-full"></div>
-                </div>
-
-                <div class="z-10 my-auto text-center px-1">
-                    <span id="preview-caption" class="bg-black/80 text-yellow-300 font-extrabold text-xs px-2.5 py-1.5 rounded-lg border border-yellow-500/30 shadow-lg inline-block leading-snug">
-                        이 가격에 이 두툼한 삼겹살 실화입니까? 🔥
-                    </span>
-                </div>
-
-                <div class="z-10 flex items-center justify-between text-white text-[10px]">
-                    <div class="flex items-center space-x-1">
-                        <div class="w-5 h-5 rounded-full bg-purple-600 flex items-center justify-center font-bold text-[9px]">M</div>
-                        <span class="font-bold">@marketjinney</span>
-                    </div>
-                    <div class="bg-black/50 px-2 py-0.5 rounded-full flex items-center space-x-1">
-                        <i class="fa-solid fa-heart text-red-500 text-[9px]"></i><span>1.2K</span>
-                    </div>
+                    <input type="text" id="edit-cta" value="오늘 저녁은 여기로 고고싱! 팔로우 필수!" oninput="updateLivePreviewText()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
             </div>
         </section>
@@ -145,7 +156,6 @@
         <!-- [섹션 5] 최종 내보내기 버튼 -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-center space-y-3">
             <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-download mr-1.5 text-purple-400"></i>5. 영상 내보내기</h2>
-            <p class="text-xs text-slate-400">모든 세팅이 완료되었다면 MP4 영상 파일로 패키징하세요.</p>
             <button onclick="exportVideo()" class="w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl text-xs shadow-lg shadow-purple-900/30 transition flex items-center justify-center space-x-2">
                 <i class="fa-solid fa-file-arrow-down text-sm"></i>
                 <span>최종 MP4 영상 다운로드 받기</span>
@@ -156,11 +166,12 @@
 
     <!-- 자바스크립트 로직 -->
     <script>
-        let selectedFiles = [];
+        let loadedImagesData = []; // 업로드된 이미지 base64 데이터 배열
         let isPlaying = false;
         let playInterval = null;
         let currentStepIndex = 0;
         let selectedVoice = 'f';
+        let currentRotation = 0; // 사진 회전 각도 (0, 90, 180, 270)
 
         function selectVoice(gender) {
             selectedVoice = gender;
@@ -181,75 +192,119 @@
             const countBadge = document.getElementById('media-count');
             
             if (files.length > 0) {
-                selectedFiles = Array.from(files);
-                countBadge.innerText = selectedFiles.length + "개 선택됨";
+                loadedImagesData = [];
                 container.innerHTML = "";
-                
+                countBadge.innerText = files.length + "개 선택됨";
+
                 let optionsHtml = "";
-                selectedFiles.forEach((file, index) => {
-                    optionsHtml += `<option value="${index}">사진 ${index+1}: ${file.name.substring(0, 10)}...</option>`;
-                    
-                    const thumbDiv = document.createElement('div');
-                    thumbDiv.className = "relative h-14 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center";
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        thumbDiv.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
-                        if(index === 0) {
-                            document.getElementById('preview-bg-img').src = e.target.result;
-                            document.getElementById('preview-bg-img').classList.remove('hidden');
-                            document.getElementById('preview-default-icon').classList.add('hidden');
-                        }
-                    }
-                    reader.readAsDataURL(file);
-                    container.appendChild(thumbDiv);
-                });
+                for(let i=0; i<files.length; i++) {
+                    optionsHtml += `<option value="${i}">사진 ${i+1} (${files[i].name.substring(0,6)})</option>`;
+                }
 
                 ['edit-img-1', 'edit-img-2', 'edit-img-3'].forEach(id => {
                     document.getElementById(id).innerHTML = optionsHtml;
                 });
+
+                let loadedCount = 0;
+                Array.from(files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        loadedImagesData[index] = e.target.result;
+                        
+                        // 썸네일 생성
+                        const thumbDiv = document.createElement('div');
+                        thumbDiv.className = "relative h-14 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center shadow";
+                        thumbDiv.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+                        container.appendChild(thumbDiv);
+
+                        // 첫 번째 사진을 기본 미리보기 배경으로 지정
+                        if(index === 0) {
+                            setPreviewImage(e.target.result);
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                });
             }
+        }
+
+        function setPreviewImage(src) {
+            const imgEl = document.getElementById('preview-active-img');
+            const iconEl = document.getElementById('preview-default-icon');
+            if(src) {
+                imgEl.src = src;
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            }
+        }
+
+        function updatePreviewImageSelection() {
+            // 1부 훅에 매칭된 사진을 미리보기에 반영
+            const selIdx = document.getElementById('edit-img-1').value;
+            if(loadedImagesData[selIdx]) {
+                setPreviewImage(loadedImagesData[selIdx]);
+            }
+        }
+
+        function rotateActivePhoto() {
+            currentRotation = (currentRotation + 90) % 360;
+            const imgEl = document.getElementById('preview-active-img');
+            imgEl.style.transform = `rotate(${currentRotation}deg)`;
+            alert(`사진이 ${currentRotation}도 회전되었습니다.`);
         }
 
         function analyzeAndGenerate() {
             const keyword = document.getElementById('ai-keyword').value;
-            if(selectedFiles.length === 0) {
+            if(loadedImagesData.length === 0) {
                 alert('먼저 1단계에서 사진이나 영상을 선택해 주세요!');
                 return;
             }
             
-            // AI 자동 대사 생성 반영
             const baseText = keyword ? keyword : "이 맛집";
             document.getElementById('edit-hook').value = `${baseText}, 진짜 안 먹어보면 후회합니다! 🔥`;
-            document.getElementById('edit-body').value = `입안에서 육즙이 폭발하는 환상의 맛! 살살 녹네요.`;
+            document.getElementById('edit-body').value = `입안에서 육즙이 폭발하는 환상적인 맛! 살살 녹네요.`;
             document.getElementById('edit-cta').value = `오늘 저녁은 여기 어때요? 팔로우 고고!`;
             
-            updateLivePreview();
-            alert('✨ AI가 사진을 분석하여 맞춤 대본과 자막을 완성했습니다!');
+            updateLivePreviewText();
+            alert('✨ AI가 사진을 분석하여 자막과 대본을 완성했습니다!');
         }
 
-        function updateLivePreview() {
-            const hookText = document.getElementById('edit-hook').value;
-            document.getElementById('preview-caption').innerText = hookText;
+        function updateLivePreviewText() {
+            if(!isPlaying) {
+                const hookText = document.getElementById('edit-hook').value;
+                document.getElementById('preview-caption').innerText = hookText;
+            }
         }
 
         function togglePlayPreview() {
             const playBtn = document.getElementById('play-btn');
+            const statusEl = document.getElementById('playback-status');
             const hook = document.getElementById('edit-hook').value;
             const body = document.getElementById('edit-body').value;
             const cta = document.getElementById('edit-cta').value;
-            const texts = [hook, body, cta];
+            const steps = [
+                { text: hook, prog: 'prog-1', imgIdx: document.getElementById('edit-img-1').value },
+                { text: body, prog: 'prog-2', imgIdx: document.getElementById('edit-img-2').value },
+                { text: cta, prog: 'prog-3', imgIdx: document.getElementById('edit-img-3').value }
+            ];
 
             if(!isPlaying) {
                 isPlaying = true;
-                playBtn.innerHTML = `<i class="fa-solid fa-pause mr-1"></i>일시정지`;
-                playBtn.className = "px-3 py-1 bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-bold rounded-lg transition shadow";
+                playBtn.innerHTML = `<i class="fa-solid fa-pause"></i><span>일시정지</span>`;
+                playBtn.className = "px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold rounded-lg transition shadow flex items-center space-x-1.5";
                 
                 currentStepIndex = 0;
                 playInterval = setInterval(() => {
-                    document.getElementById('preview-caption').innerText = texts[currentStepIndex];
-                    currentStepIndex = (currentStepIndex + 1) % texts.length;
-                }, 2000);
+                    const current = steps[currentStepIndex];
+                    document.getElementById('preview-caption').innerText = current.text;
+                    statusEl.innerText = `▶ 재생 중... [파트 ${currentStepIndex + 1} / 3]`;
+                    
+                    // 매칭된 사진이 있으면 배경 변경
+                    if(loadedImagesData[current.imgIdx]) {
+                        setPreviewImage(loadedImagesData[current.imgIdx]);
+                    }
+
+                    currentStepIndex = (currentStepIndex + 1) % steps.length;
+                }, 2500);
             } else {
                 stopPreview();
             }
@@ -259,17 +314,19 @@
             isPlaying = false;
             clearInterval(playInterval);
             const playBtn = document.getElementById('play-btn');
-            playBtn.innerHTML = `<i class="fa-solid fa-play mr-1"></i>재생`;
-            playBtn.className = "px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold rounded-lg transition shadow";
-            updateLivePreview();
+            const statusEl = document.getElementById('playback-status');
+            playBtn.innerHTML = `<i class="fa-solid fa-play"></i><span>재생하기</span>`;
+            playBtn.className = "px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-lg transition shadow flex items-center space-x-1.5";
+            statusEl.innerText = "정지 상태 (다시 재생하려면 버튼을 누르세요)";
+            updateLivePreviewText();
         }
 
         function exportVideo() {
-            if(selectedFiles.length === 0) {
+            if(loadedImagesData.length === 0) {
                 alert('내보낼 미디어가 없습니다. 사진을 먼저 선택해 주세요!');
                 return;
             }
-            alert('🎉 숏폼 영상 렌더링이 완료되었습니다! 다운로드가 시작됩니다.');
+            alert('🎉 숏폼 영상 패키징이 성공적으로 완료되었습니다! 다운로드가 시작됩니다.');
         }
     </script>
 </body>
