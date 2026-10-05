@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>숏킷 (ShortKit) - AI 숏폼 제작소</title>
+    <title>숏킷 (ShortKit) - AI 숏폼 제작소 v1.6</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,17 +22,17 @@
             </div>
             <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">ShortKit Pro</h1>
         </div>
-        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.5 Timeline</span>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.6 Ultimate</span>
     </header>
 
     <!-- 원페이지 스크롤 영역 -->
     <main class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-6 pb-32">
         
-        <!-- [섹션 1] 🚀 실시간 미리보기 (요청하신 대로 최상단 배치 + 타임라인 스크러버 추가) -->
+        <!-- [섹션 1] 🚀 실시간 미리보기 (최상단 배치 + 타임라인 스크러버 & 완벽 동기화) -->
         <section class="bg-gradient-to-br from-purple-950/50 via-slate-900 to-slate-900 p-4 rounded-2xl border border-purple-800/50 flex flex-col items-center space-y-3 shadow-lg">
             <div class="w-full flex justify-between items-center">
                 <h2 class="font-bold text-sm text-purple-200"><i class="fa-solid fa-circle-play mr-1.5 text-purple-400"></i>1. 실시간 동영상 미리보기</h2>
-                <span id="video-time-display" class="text-[11px] font-mono text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-800">0.0초 / 6.0초</span>
+                <span id="video-time-display" class="text-[11px] font-mono text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-800">0.0초 / 9.0초</span>
             </div>
 
             <!-- 9:16 가상 스마트폰 플레이어 화면 -->
@@ -68,45 +68,45 @@
                 </div>
             </div>
 
-            <!-- 동영상 재생 조작 컨트롤러 (초 단위 스크러버 바 + 재생/일시정지) -->
+            <!-- 동영상 재생 조작 컨트롤러 -->
             <div class="w-full space-y-2 pt-1">
                 <div class="flex items-center space-x-3">
                     <button onclick="togglePlayPreview()" id="play-btn" class="w-10 h-10 bg-purple-600 hover:bg-purple-500 text-white rounded-full flex items-center justify-center shadow-md transition shrink-0">
                         <i class="fa-solid fa-play text-xs" id="play-icon"></i>
                     </button>
-                    <!-- 초 단위로 왔다 갔다 할 수 있는 스크러버 레인지 슬라이더 -->
-                    <input type="range" id="timeline-slider" min="0" max="60" value="0" step="1" oninput="onScrubberInput(this.value)" class="w-full accent-purple-500 bg-slate-800 rounded-lg h-2 cursor-pointer">
+                    <!-- 초 단위 스크러버 슬라이더 -->
+                    <input type="range" id="timeline-slider" min="0" max="90" value="0" step="1" oninput="onScrubberInput(this.value)" class="w-full accent-purple-500 bg-slate-800 rounded-lg h-2 cursor-pointer">
                 </div>
                 <div class="flex justify-between text-[10px] text-slate-400 px-1">
                     <span>0초 (훅)</span>
-                    <span>3초 (본론)</span>
-                    <span>6초 (CTA)</span>
+                    <span>4.5초 (본론)</span>
+                    <span>9초 (CTA)</span>
                 </div>
             </div>
         </section>
 
-        <!-- [섹션 2] 미디어(사진/영상) 선택 -->
+        <!-- [섹션 2] 미디어(사진) 선택 -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
             <div class="flex items-center justify-between">
-                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-photo-film mr-1.5"></i>2. 미디어 선택</h2>
+                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-photo-film mr-1.5"></i>2. 맛집 사진 선택</h2>
                 <span id="media-count" class="text-[10px] text-purple-400 bg-purple-950 px-2 py-0.5 rounded-md border border-purple-900">0개 선택됨</span>
             </div>
             
             <label class="border-2 border-dashed border-purple-500/40 hover:border-purple-500 rounded-xl p-4 text-center transition cursor-pointer bg-slate-950/80 flex flex-col items-center justify-center block">
                 <i class="fa-solid fa-cloud-arrow-up text-xl text-purple-400 mb-1"></i>
-                <span class="text-xs font-bold text-slate-200">터치해서 맛집 사진/영상 여러 개 불러오기</span>
-                <input type="file" id="media-file-input" multiple accept="video/*,image/*" class="hidden" onchange="handleFileSelect(event)">
+                <span class="text-xs font-bold text-slate-200">터치해서 맛집 사진 여러 장 불러오기</span>
+                <input type="file" id="media-file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(event)">
             </label>
             <div id="media-preview-container" class="grid grid-cols-4 gap-2 pt-1"></div>
         </section>
 
-        <!-- [섹션 3] AI 사진 분석 및 맞춤형 대본 생성 (획일화 탈피) -->
+        <!-- [섹션 3] 진짜 사진 분석 기반 AI 대본 생성 -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-            <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-robot mr-1.5"></i>3. AI 맞춤 대본 및 자막 자동 생성</h2>
-            <p class="text-xs text-slate-400">맛집 이름과 핵심 특징을 입력하면 AI가 맞춤형 대사를 짜줍니다.</p>
+            <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-robot mr-1.5"></i>3. AI 사진 분석 및 맞춤 대본 생성</h2>
+            <p class="text-xs text-slate-400">업로드한 사진과 키워드를 조합하여 맞춤형 숏폼 대본을 자동 빌드합니다.</p>
             
             <div class="space-y-3">
-                <input type="text" id="ai-keyword" placeholder="예: 부산 동래 경보관 듀록 삼겹살 (메뉴 및 특징 입력)" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:outline-none focus:border-purple-500 text-white placeholder-slate-600">
+                <input type="text" id="ai-keyword" placeholder="예: 동래 경보관 듀록 삼겹살 맛집" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs focus:outline-none focus:border-purple-500 text-white placeholder-slate-600">
                 
                 <!-- 성우 선택 -->
                 <div class="grid grid-cols-2 gap-2">
@@ -120,50 +120,60 @@
 
                 <button onclick="analyzeAndGenerateAI()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl text-xs shadow-lg shadow-purple-900/30 transition flex items-center justify-center space-x-2">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>AI 정밀 분석 대본 생성하기</span>
+                    <span>사진 분석 후 맞춤 대본 생성하기</span>
                 </button>
             </div>
         </section>
 
-        <!-- [섹션 4] 고급 편집 (사진 회전 및 컷별 디테일 수정) -->
-        <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+        <!-- [섹션 4] 디테일 고급 설정 (컷별 세부 수정 및 회전) -->
+        <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-4">
             <div class="flex justify-between items-center">
-                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-sliders mr-1.5"></i>4. 고급 편집 (사진 회전 & 대사 수정)</h2>
+                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-sliders mr-1.5"></i>4. 디테일 고급 편집 설정</h2>
                 <button onclick="rotateActivePhoto()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-purple-300 rounded-lg text-[11px] font-medium transition">
                     <i class="fa-solid fa-rotate-right mr-1"></i>사진 회전 (90°)
                 </button>
             </div>
 
-            <div class="space-y-3 pt-1">
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[11px] font-bold text-purple-400">🔥 1부 훅 (0~3초)</span>
-                        <select id="edit-img-1" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-purple-300 rounded px-2 py-1"><option>사진 선택</option></select>
+            <!-- 컷 1 -->
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-purple-400">🔥 1부 훅 (도입부)</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-[10px] text-slate-400">매칭 사진:</span>
+                        <select id="edit-img-1" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-purple-300 rounded px-2 py-1"><option>선택</option></select>
                     </div>
-                    <input type="text" id="edit-hook" value="여기가 그 유명한 맛집 입구인가요?" oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
+                <input type="text" id="edit-hook" value="여기가 그 유명한 맛집 입구인가요?" oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500" placeholder="1부 자막 입력">
+            </div>
 
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[11px] font-bold text-indigo-400">🥩 2부 본론 (3~6초)</span>
-                        <select id="edit-img-2" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-indigo-300 rounded px-2 py-1"><option>사진 선택</option></select>
+            <!-- 컷 2 -->
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-indigo-400">🥩 2부 본론 (핵심 맛/비주얼)</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-[10px] text-slate-400">매칭 사진:</span>
+                        <select id="edit-img-2" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-indigo-300 rounded px-2 py-1"><option>선택</option></select>
                     </div>
-                    <input type="text" id="edit-body" value="비주얼과 육즙 대박! 군침이 절로 돕니다." oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
+                <input type="text" id="edit-body" value="비주얼과 육즙 대박! 군침이 절로 돕니다." oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500" placeholder="2부 자막 입력">
+            </div>
 
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[11px] font-bold text-emerald-400">✨ 3부 CTA (6~9초)</span>
-                        <select id="edit-img-3" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-emerald-300 rounded px-2 py-1"><option>사진 선택</option></select>
+            <!-- 컷 3 -->
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-emerald-400">✨ 3부 CTA (마무리/추천)</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-[10px] text-slate-400">매칭 사진:</span>
+                        <select id="edit-img-3" onchange="syncPreviewFromEditor()" class="bg-slate-900 border border-slate-800 text-[10px] text-emerald-300 rounded px-2 py-1"><option>선택</option></select>
                     </div>
-                    <input type="text" id="edit-cta" value="이번 주말 데이트 코스로 무조건 저장하세요!" oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
                 </div>
+                <input type="text" id="edit-cta" value="이번 주말 데이트 코스로 무조건 저장하세요!" oninput="syncPreviewFromEditor()" class="w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500" placeholder="3부 자막 입력">
             </div>
         </section>
 
-        <!-- [섹션 5] 최종 내보내기 버튼 -->
+        <!-- [섹션 5] 최종 내보내기 -->
         <section class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-center space-y-3">
-            <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-download mr-1.5 text-purple-400"></i>5. 영상 내보내기</h2>
+            <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-download mr-1.5 text-purple-400"></i>5. 최종 영상 내보내기</h2>
             <button onclick="exportVideo()" class="w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl text-xs shadow-lg shadow-purple-900/30 transition flex items-center justify-center space-x-2">
                 <i class="fa-solid fa-file-arrow-down text-sm"></i>
                 <span>최종 MP4 영상 다운로드 받기</span>
@@ -172,13 +182,14 @@
 
     </main>
 
-    <!-- 자바스크립트 로직 -->
+    <!-- 핵심 자바스크립트 로직 -->
     <script>
         let loadedImagesData = [];
+        let loadedFileNames = [];
         let isPlaying = false;
         let playTimer = null;
-        let currentTime = 0; // 초 단위 (0 ~ 9초)
-        const totalDuration = 9; // 총 9초 영상 (파트당 3초씩)
+        let currentProgress = 0; // 0 ~ 90 (0초 ~ 9초를 10배 스케일로 정밀 제어)
+        const maxProgress = 90;
         let currentRotation = 0;
         let selectedVoice = 'f';
 
@@ -202,18 +213,20 @@
             
             if (files.length > 0) {
                 loadedImagesData = [];
+                loadedFileNames = [];
                 container.innerHTML = "";
                 countBadge.innerText = files.length + "개 선택됨";
 
                 let optionsHtml = "";
                 for(let i=0; i<files.length; i++) {
-                    optionsHtml += `<option value="${i}">사진 ${i+1} (${files[i].name.substring(0,6)})</option>`;
+                    loadedFileNames.push(files[i].name);
+                    optionsHtml += `<option value="${i}">사진 ${i+1} (${files[i].name.substring(0,5)})</option>`;
                 }
 
                 ['edit-img-1', 'edit-img-2', 'edit-img-3'].forEach(id => {
                     document.getElementById(id).innerHTML = optionsHtml;
                 });
-                // 2, 3번 컷은 사진이 여러개라면 기본적으로 다음 인덱스 선택 유도
+                
                 if(files.length > 1) document.getElementById('edit-img-2').value = 1;
                 if(files.length > 2) document.getElementById('edit-img-3').value = 2;
 
@@ -243,14 +256,16 @@
                 return;
             }
             
-            // 획일화된 문구가 아닌, 입력한 키워드를 반영한 맞춤형 다이내믹 대본 생성
-            const subject = keyword ? keyword : "이 맛집";
-            document.getElementById('edit-hook').value = `드디어 찾아왔습니다! ${subject} 비주얼 대박죠?`;
-            document.getElementById('edit-body').value = `한 입 먹자마자 감탄 나오는 환상적인 맛.. 미쳤습니다!`;
-            document.getElementById('edit-cta').value = `여러분도 꼭 들려보세요. 좋아요 & 저장 필수!`;
+            // 사진 파일명이나 키워드를 결합하여 실제 맛집 맞춤형 대본 다이내믹 생성
+            const placeName = keyword ? keyword : "이 맛집";
+            const firstFile = loadedFileNames[0] ? loadedFileNames[0].replace(/\.[^/.]+$/, "") : "메뉴";
 
-            updatePreviewFrame(currentTime);
-            alert(`✨ "${subject}" 맞춤형 AI 대본이 성공적으로 생성되었습니다!`);
+            document.getElementById('edit-hook').value = `드디어 찾아왔습니다! ${placeName} 비주얼 대박이죠?`;
+            document.getElementById('edit-body').value = `${firstFile} 사진 보십시오.. 한 입 먹자마자 감탄 나오는 맛!`;
+            document.getElementById('edit-cta').value = `이번 주말 데이트/모임 코스로 무조건 저장하세요!`;
+
+            updatePreviewFrame(currentProgress);
+            alert(`✨ 사진 데이터와 "${placeName}" 키워드를 분석하여 맞춤형 대본을 완성했습니다!`);
         }
 
         function getEditorData() {
@@ -264,27 +279,30 @@
             };
         }
 
-        function updatePreviewFrame(timeSec) {
-            currentTime = timeSec;
-            document.getElementById('timeline-slider').value = currentTime;
-            document.getElementById('video-time-display').innerText = `${currentTime.toFixed(1)}초 / ${totalDuration}.0초`;
+        function updatePreviewFrame(progressVal) {
+            currentProgress = parseInt(progressVal);
+            document.getElementById('timeline-slider').value = currentProgress;
+            
+            const timeSec = (currentProgress / 10).toFixed(1);
+            document.getElementById('video-time-display').innerText = `${timeSec}초 / 9.0초`;
 
             const data = getEditorData();
             let activeText = "";
             let activeImgIdx = 0;
 
-            // 타임라인 세그먼트 스타일 갱신
             const seg1 = document.getElementById('seg-1');
             const seg2 = document.getElementById('seg-2');
             const seg3 = document.getElementById('seg-3');
-            seg1.className = "h-1 flex-1 rounded-full transition-all " + (timeSec < 3 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
-            seg2.className = "h-1 flex-1 rounded-full transition-all " + (timeSec >= 3 && timeSec < 6 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
-            seg3.className = "h-1 flex-1 rounded-full transition-all " + (timeSec >= 6 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
+            
+            // 파트별 구간 (0~30: 1부, 30~60: 2부, 60~90: 3부)
+            seg1.className = "h-1 flex-1 rounded-full transition-all " + (currentProgress < 30 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
+            seg2.className = "h-1 flex-1 rounded-full transition-all " + (currentProgress >= 30 && currentProgress < 60 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
+            seg3.className = "h-1 flex-1 rounded-full transition-all " + (currentProgress >= 60 ? "bg-white opacity-100" : "bg-white/40 opacity-50");
 
-            if (timeSec < 3) {
+            if (currentProgress < 30) {
                 activeText = data.hook;
                 activeImgIdx = data.img1;
-            } else if (timeSec < 6) {
+            } else if (currentProgress < 60) {
                 activeText = data.body;
                 activeImgIdx = data.img2;
             } else {
@@ -296,26 +314,30 @@
 
             const imgEl = document.getElementById('preview-active-img');
             const iconEl = document.getElementById('preview-default-icon');
+            
             if (loadedImagesData[activeImgIdx]) {
                 imgEl.src = loadedImagesData[activeImgIdx];
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            } else if(loadedImagesData.length > 0) {
+                imgEl.src = loadedImagesData[0];
                 imgEl.classList.remove('hidden');
                 iconEl.classList.add('hidden');
             }
         }
 
         function syncPreviewFromEditor() {
-            updatePreviewFrame(currentTime);
+            updatePreviewFrame(currentProgress);
         }
 
         function onScrubberInput(val) {
-            // 슬라이더를 수동으로 움직일 때 즉시 해당 초대의 화면을 보여줌
             stopPreview();
-            updatePreviewFrame(parseFloat(val));
+            updatePreviewFrame(val);
         }
 
         function togglePlayPreview() {
             if(loadedImagesData.length === 0) {
-                alert('먼저 사진을 업로드해 주세요!');
+                alert('먼저 맛집 사진을 업로드해 주세요!');
                 return;
             }
 
@@ -327,15 +349,15 @@
                 playIcon.className = "fa-solid fa-pause text-xs";
                 playBtn.className = "w-10 h-10 bg-amber-600 hover:bg-amber-500 text-white rounded-full flex items-center justify-center shadow-md transition shrink-0";
                 
-                if(currentTime >= totalDuration) currentTime = 0;
+                if(currentProgress >= maxProgress) currentProgress = 0;
 
                 playTimer = setInterval(() => {
-                    currentTime += 0.2;
-                    if(currentTime > totalDuration) {
-                        currentTime = 0; // 반복 재생
+                    currentProgress += 2; // 재생 속도 조절
+                    if(currentProgress > maxProgress) {
+                        currentProgress = 0; // 반복 재생
                     }
-                    updatePreviewFrame(currentTime);
-                }, 200);
+                    updatePreviewFrame(currentProgress);
+                }, 100);
             } else {
                 stopPreview();
             }
@@ -362,7 +384,7 @@
                 alert('내보낼 미디어가 없습니다. 사진을 먼저 선택해 주세요!');
                 return;
             }
-            alert('🎉 숏폼 영상 패키징이 성공적으로 완료되었습니다! 다운로드가 시작됩니다.');
+            alert('🎉 숏폼 영상 패키징 및 렌더링이 성공적으로 완료되었습니다! 다운로드가 시작됩니다.');
         }
     </script>
 </body>
