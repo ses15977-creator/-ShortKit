@@ -24,18 +24,18 @@
             <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">ShortKit</h1>
         </div>
         <div class="flex items-center space-x-2">
-            <span class="text-xs px-2 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.1 MVP</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50">v1.2 Pro</span>
         </div>
     </header>
 
     <!-- 메인 컨텐츠 영역 (탭별 화면) -->
     <main class="flex-1 overflow-y-auto hide-scrollbar pb-24">
         
-        <!-- [탭 1] 1단계: 미디어 업로드 (순서 앞당김) -->
+        <!-- [탭 1] 1단계: 미디어 업로드 -->
         <section id="tab-media" class="p-4 space-y-4">
             <div class="bg-gradient-to-br from-purple-900/40 to-slate-900 p-4 rounded-2xl border border-purple-800/30 space-y-3">
                 <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-photo-film mr-1.5"></i>1단계: 미디어(사진/영상) 먼저 담기</h2>
-                <p class="text-xs text-slate-400">촬영해 두신 맛집 음식 사진이나 릴스/숏츠용 영상을 먼저 선택해 주세요.</p>
+                <p class="text-xs text-slate-400">촬영해 두신 맛집 음식 사진이나 릴스/숏츠용 영상을 선택해 주세요.</p>
                 
                 <label class="border-2 border-dashed border-purple-500/40 hover:border-purple-500 rounded-2xl p-6 text-center transition cursor-pointer bg-slate-950/80 flex flex-col items-center justify-center block">
                     <i class="fa-solid fa-cloud-arrow-up text-3xl text-purple-400 mb-2"></i>
@@ -45,27 +45,26 @@
                 </label>
             </div>
 
-            <!-- 업로드된 미디어 미리보기 목록 -->
             <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-300"><i class="fa-solid layers mr-1 text-purple-400"></i>선택된 미디어 클립</span>
+                    <span class="text-xs font-bold text-slate-300"><i class="fa-solid fa-layer-group mr-1 text-purple-400"></i>선택된 미디어 클립</span>
                     <span id="media-count" class="text-[10px] text-purple-400 bg-purple-950 px-2 py-0.5 rounded-md border border-purple-900">0개 선택됨</span>
                 </div>
-                <div id="media-preview-list" class="text-xs text-slate-500 text-center py-6 border border-slate-800/50 rounded-xl bg-slate-950/50">
+                <div id="media-preview-list" class="text-xs text-slate-400 text-center py-6 border border-slate-800/50 rounded-xl bg-slate-950/50">
                     아직 선택된 미디어가 없습니다. 위 상단을 눌러 추가해 주세요.
                 </div>
             </div>
         </section>
 
-        <!-- [탭 2] 2단계: AI 대본 및 성우/자막 설정 -->
+        <!-- [탭 2] 2단계: AI 대본 및 성우 설정 -->
         <section id="tab-prompt" class="p-4 space-y-4 hidden">
             <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-                <h2 class="font-bold text-sm text-purple-300 mb-1"><i class="fa-solid fa-robot mr-1.5"></i>2단계: AI 숏폼 대본 자동 생성</h2>
-                <p class="text-xs text-slate-400 mb-3">올려주신 미디어와 맛집 정보를 바탕으로 조회수 터지는 대본을 짭니다.</p>
+                <h2 class="font-bold text-sm text-purple-300 mb-1"><i class="fa-solid fa-robot mr-1.5"></i>2단계: AI 대본 및 성우 선택</h2>
+                <p class="text-xs text-slate-400 mb-3">맛집 이름과 핵심 포인트를 입력하고 성우를 골라보세요.</p>
                 
                 <div class="space-y-3">
                     <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">맛집 이름 및 핵심 포인트</label>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">맛집 이름 및 키워드</label>
                         <input type="text" id="ai-keyword" placeholder="예: 부산 동래 경보관 듀록 삼겹살 육즙 대박" class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-white placeholder-slate-600">
                     </div>
                     <button onclick="generateScript()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl text-sm shadow-lg shadow-purple-900/30 transition flex items-center justify-center space-x-2">
@@ -75,57 +74,86 @@
                 </div>
             </div>
 
-            <!-- 생성된 대본 결과 카드 -->
+            <!-- AI 성우 선택 (정상 동작하도록 스크립트 연결) -->
             <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-300"><i class="fa-solid fa-file-lines mr-1 text-purple-400"></i>편집용 대본 & 자막 싱크</span>
-                    <span class="text-[10px] text-purple-400 bg-purple-950 px-2 py-0.5 rounded-md border border-purple-900">숏폼 최적화</span>
-                </div>
-                <textarea id="script-result" rows="4" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-purple-500 leading-relaxed resize-none" placeholder="미디어를 올리고 대본 생성 버튼을 누르면 여기에 대본이 채워집니다.">미디어를 먼저 선택한 후 키워드를 입력해 주세요!</textarea>
-            </div>
-
-            <!-- AI 성우 & 자막 스타일 선택 -->
-            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-                <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-microphone-lines mr-1.5 text-purple-400"></i>AI 성우 및 자막 설정</h2>
+                <h2 class="font-bold text-sm text-slate-200"><i class="fa-solid fa-microphone-lines mr-1.5 text-purple-400"></i>AI 성우 목소리 선택</h2>
                 <div class="grid grid-cols-2 gap-2">
-                    <button class="py-2.5 px-3 bg-purple-600/20 border border-purple-500/50 rounded-xl text-xs font-bold text-purple-300 flex items-center justify-center space-x-2">
+                    <button id="voice-f" onclick="selectVoice('f')" class="py-2.5 px-3 bg-purple-600 border border-purple-500 rounded-xl text-xs font-bold text-white flex items-center justify-center space-x-2 transition shadow-md">
                         <i class="fa-solid fa-venus"></i><span>여성 성우 (지니)</span>
                     </button>
-                    <button class="py-2.5 px-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 flex items-center justify-center space-x-2 hover:border-slate-700">
+                    <button id="voice-m" onclick="selectVoice('m')" class="py-2.5 px-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 flex items-center justify-center space-x-2 hover:border-slate-700 transition">
                         <i class="fa-solid fa-mars"></i><span>남성 성우 (마켓)</span>
                     </button>
                 </div>
             </div>
+
+            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300"><i class="fa-solid fa-file-lines mr-1 text-purple-400"></i>생성된 대본 결과</span>
+                </div>
+                <textarea id="script-result" rows="4" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-purple-500 leading-relaxed resize-none">미디어를 선택한 후 대본 생성 버튼을 눌러주세요!</textarea>
+            </div>
         </section>
 
-        <!-- [탭 3] 3단계: 실시간 미리보기 (9:16 플레이어) -->
+        <!-- [탭 3] 3단계: 고급 편집 (디테일 세팅 기능 추가) -->
+        <section id="tab-edit" class="p-4 space-y-4 hidden">
+            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+                <h2 class="font-bold text-sm text-purple-300"><i class="fa-solid fa-sliders mr-1.5"></i>3단계: 타임라인 & 자막 디테일 편집</h2>
+                <p class="text-xs text-slate-400">파트별 문구와 타이밍을 직접 수정하여 완성도를 높이세요.</p>
+
+                <div class="space-y-3 pt-2">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-[11px] font-bold text-purple-400">🔥 1부 훅 (0~3초)</span>
+                        <input type="text" id="edit-hook" value="이 가격에 이 두툼한 삼겹살 실화입니까?" oninput="updatePreviewText()" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-[11px] font-bold text-indigo-400">🥩 2부 본론 (3~20초)</span>
+                        <input type="text" id="edit-body" value="육즙이 폭발하는 환상적인 맛! 입안에서 살살 녹습니다." oninput="updatePreviewText()" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5">
+                        <span class="text-[11px] font-bold text-emerald-400">✨ 3부 CTA (20~30초)</span>
+                        <input type="text" id="edit-cta" value="오늘 저녁은 여기로 고고싱! 팔로우 필수!" oninput="updatePreviewText()" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">자막 스타일 테마</label>
+                        <select class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none">
+                            <option>형광펜 하이라이트 (틱톡/릴스 추천)</option>
+                            <option>자막바 클래식 스타일</option>
+                            <option>네온 볼드 스타일</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [탭 4] 4단계: 실시간 미리보기 (9:16 플레이어) -->
         <section id="tab-preview" class="p-4 flex flex-col items-center justify-center space-y-3 hidden">
             <div class="text-center">
-                <h2 class="font-bold text-sm text-slate-200">3단계: 실시간 숏폼 미리보기</h2>
+                <h2 class="font-bold text-sm text-slate-200">4단계: 실시간 숏폼 미리보기</h2>
                 <p class="text-[11px] text-slate-400">스마트폰 9:16 비율 화면 시뮬레이션</p>
             </div>
 
             <!-- 9:16 가상 스마트폰 화면 -->
             <div class="relative w-56 h-[400px] bg-black rounded-3xl border-4 border-slate-800 overflow-hidden shadow-2xl flex flex-col justify-between p-4">
-                <!-- 배경 연출 -->
                 <div class="absolute inset-0 bg-gradient-to-b from-purple-950/40 via-slate-900 to-black z-0 flex items-center justify-center">
                     <i class="fa-solid fa-video text-slate-800 text-5xl animate-pulse"></i>
                 </div>
                 
-                <!-- 상단 프로그레스 바 -->
                 <div class="z-10 flex space-x-1 w-full">
                     <div class="h-1 bg-white flex-1 rounded-full opacity-90"></div>
                     <div class="h-1 bg-white/40 flex-1 rounded-full"></div>
                 </div>
 
-                <!-- 중앙 실시간 자막 박스 -->
+                <!-- 자막 박스 (고급 편집에서 수정하는 내용이 실시간 반영됨) -->
                 <div class="z-10 my-auto text-center px-2">
                     <span id="preview-caption" class="bg-black/70 text-yellow-300 font-extrabold text-sm px-3 py-1.5 rounded-lg border border-yellow-500/30 shadow-lg tracking-tight inline-block">
-                        미디어를 올리고 대본을 만들어보세요! 🔥
+                        이 가격에 이 두툼한 삼겹살 실화입니까? 🔥
                     </span>
                 </div>
 
-                <!-- 하단 채널 정보 -->
                 <div class="z-10 flex items-center justify-between text-white text-xs">
                     <div class="flex items-center space-x-1.5">
                         <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-[10px]">M</div>
@@ -142,15 +170,15 @@
             </button>
         </section>
 
-        <!-- [탭 4] 4단계: 내보내기 -->
+        <!-- [탭 5] 5단계: 내보내기 -->
         <section id="tab-export" class="p-4 space-y-4 hidden">
             <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-center space-y-4">
                 <div class="w-12 h-12 bg-purple-600/20 border border-purple-500/50 rounded-2xl flex items-center justify-center mx-auto text-purple-400 text-xl">
                     <i class="fa-solid fa-file-arrow-down"></i>
                 </div>
                 <div>
-                    <h2 class="font-bold text-sm text-slate-200">4단계: 최종 숏폼 영상 내보내기</h2>
-                    <p class="text-xs text-slate-400 mt-1">선택하신 미디어와 AI 대본이 어우러진 최종 MP4 패키지를 생성합니다.</p>
+                    <h2 class="font-bold text-sm text-slate-200">5단계: 최종 숏폼 영상 내보내기</h2>
+                    <p class="text-xs text-slate-400 mt-1">디테일 편집과 음성 세팅이 반영된 최종 MP4 패키지를 생성합니다.</p>
                 </div>
                 <button onclick="alert('숏폼 영상 렌더링 및 다운로드 준비 완료!')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl text-sm shadow-lg shadow-purple-900/30 transition">
                     최종 MP4 영상 다운로드
@@ -160,30 +188,34 @@
 
     </main>
 
-    <!-- 하단 고정 네비게이션 탭 바 (순서 개편 반영) -->
-    <nav class="absolute bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/95 backdrop-blur border-t border-slate-800 flex justify-around py-3 px-2 z-20">
+    <!-- 하단 고정 네비게이션 탭 바 (5개 탭 완비) -->
+    <nav class="absolute bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/95 backdrop-blur border-t border-slate-800 flex justify-around py-3 px-1 z-20">
         <button onclick="switchTab('media')" id="nav-media" class="flex flex-col items-center space-y-1 text-purple-400 transition">
-            <i class="fa-solid fa-photo-film text-base"></i>
-            <span class="text-[10px] font-bold">1.미디어</span>
+            <i class="fa-solid fa-photo-film text-sm"></i>
+            <span class="text-[9px] font-bold">미디어</span>
         </button>
         <button onclick="switchTab('prompt')" id="nav-prompt" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-slate-200 transition">
-            <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
-            <span class="text-[10px] font-medium">2.대본AI</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+            <span class="text-[9px] font-medium">AI대본</span>
+        </button>
+        <button onclick="switchTab('edit')" id="nav-edit" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-slate-200 transition">
+            <i class="fa-solid fa-sliders text-sm"></i>
+            <span class="text-[9px] font-medium">고급편집</span>
         </button>
         <button onclick="switchTab('preview')" id="nav-preview" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-slate-200 transition">
-            <i class="fa-solid fa-circle-play text-base"></i>
-            <span class="text-[10px] font-medium">3.미리보기</span>
+            <i class="fa-solid fa-circle-play text-sm"></i>
+            <span class="text-[9px] font-medium">미리보기</span>
         </button>
         <button onclick="switchTab('export')" id="nav-export" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-slate-200 transition">
-            <i class="fa-solid fa-download text-base"></i>
-            <span class="text-[10px] font-medium">4.내보내기</span>
+            <i class="fa-solid fa-download text-sm"></i>
+            <span class="text-[9px] font-medium">내보내기</span>
         </button>
     </nav>
 
     <!-- 자바스크립트 로직 -->
     <script>
         function switchTab(tabName) {
-            ['media', 'prompt', 'preview', 'export'].forEach(t => {
+            ['media', 'prompt', 'edit', 'preview', 'export'].forEach(t => {
                 document.getElementById('tab-' + t).classList.add('hidden');
                 document.getElementById('nav-' + t).className = "flex flex-col items-center space-y-1 text-slate-400 hover:text-slate-200 transition";
             });
@@ -202,26 +234,47 @@
                 for(let i=0; i<files.length; i++) {
                     fileNames += `• ${files[i].name}<br>`;
                 }
-                previewList.innerHTML = `<div class="text-purple-300 font-medium text-left p-2">${fileNames}</div><p class="text-[10px] text-emerald-400 mt-1">✔ 미디어 로드 완료! 이제 [2.대본AI] 탭으로 이동하세요.</p>`;
-                alert(files.length + "개의 미디어가 성공적으로 선택되었습니다!");
+                previewList.innerHTML = `<div class="text-purple-300 font-medium text-left p-2">${fileNames}</div><p class="text-[10px] text-emerald-400 mt-1">✔ 미디어 로드 완료! [AI대본] 또는 [고급편집]으로 이동하세요.</p>`;
+            }
+        }
+
+        function selectVoice(gender) {
+            const btnF = document.getElementById('voice-f');
+            const btnM = document.getElementById('voice-m');
+            if(gender === 'f') {
+                btnF.className = "py-2.5 px-3 bg-purple-600 border border-purple-500 rounded-xl text-xs font-bold text-white flex items-center justify-center space-x-2 transition shadow-md";
+                btnM.className = "py-2.5 px-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 flex items-center justify-center space-x-2 hover:border-slate-700 transition";
+                alert('여성 성우 (지니) 목소리가 선택되었습니다.');
+            } else {
+                btnM.className = "py-2.5 px-3 bg-purple-600 border border-purple-500 rounded-xl text-xs font-bold text-white flex items-center justify-center space-x-2 transition shadow-md";
+                btnF.className = "py-2.5 px-3 bg-slate-950 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 flex items-center justify-center space-x-2 hover:border-slate-700 transition";
+                alert('남성 성우 (마켓) 목소리가 선택되었습니다.');
             }
         }
 
         function generateScript() {
             const keyword = document.getElementById('ai-keyword').value;
             const resultBox = document.getElementById('script-result');
-            const previewCaption = document.getElementById('preview-caption');
             
             if(!keyword) {
                 alert('맛집 키워드를 입력해 주세요!');
                 return;
             }
             
-            const generatedText = `[AI 맞춤 대본 완성]\n- 주제: ${keyword}\n\n[1부 훅 (0~3초)] "${keyword}, 진짜 안 먹어보면 후회합니다!"\n[2부 본론 (3~20초)] 가져오신 영상과 함께 입에서 살살 녹는 비주얼 폭발!\n[3부 CTA] 오늘 저녁은 여기로 고고싱!`;
+            // 고급 편집 입력창에도 기본값 세팅
+            document.getElementById('edit-hook').value = `${keyword}, 진짜 안 먹어보면 후회합니다!`;
+            document.getElementById('edit-body').value = `입안에서 육즙이 폭발하는 환상의 맛!`;
+            document.getElementById('edit-cta').value = `오늘 저녁은 여기 어때요? 팔로우 고고!`;
             
-            resultBox.value = generatedText;
-            previewCaption.innerText = `${keyword}! 🔥`;
-            alert('미디어 맞춤 AI 대본이 뚝딱 완성되었습니다!');
+            resultBox.value = `[AI 맞춤 대본 완성]\n- 주제: ${keyword}\n\n[1부 훅] ${document.getElementById('edit-hook').value}\n[2부 본론] ${document.getElementById('edit-body').value}\n[3부 CTA] ${document.getElementById('edit-cta').value}`;
+            
+            updatePreviewText();
+            alert('AI 대본이 생성되고 고급 편집 설정에 반영되었습니다!');
+        }
+
+        function updatePreviewText() {
+            const hookText = document.getElementById('edit-hook').value;
+            document.getElementById('preview-caption').innerText = hookText + " 🔥";
         }
     </script>
 </body>
