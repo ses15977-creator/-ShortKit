@@ -1,5 +1,5 @@
 import {redirect} from 'next/navigation';
-import {env} from 'cloudflare:workers';
+import {runtimeEnv as env} from '@/lib/shortkit/runtime-env';
 import Link from 'next/link';
 import {getSiteUser,registerMember} from '../../site-auth';
 import {isShortkitOwner} from '@/lib/shortkit/gemini-server';
