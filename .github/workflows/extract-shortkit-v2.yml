@@ -1,0 +1,43 @@
+name: Extract ShortKit V2 package
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract uploaded ShortKit package
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP="$(find . -maxdepth 1 -type f -name 'Shortkit_V2_0_20_1_deploy_verify_root*.zip' | head -n 1)"
+          if [ -z "$ZIP" ]; then
+            echo "No ShortKit deployment ZIP found. Nothing to do."
+            exit 0
+          fi
+          rm -rf /tmp/shortkit-v2
+          mkdir -p /tmp/shortkit-v2
+          unzip -q -o "$ZIP" -d /tmp/shortkit-v2
+          rsync -a --delete             --exclude '.git/'             --exclude '.github/'             /tmp/shortkit-v2/ ./
+          rm -f "$ZIP"
+
+      - name: Commit extracted V2.0.20.1 source
+        shell: bash
+        run: |
+          if git diff --quiet && git diff --cached --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Deploy ShortKit V2.0.20.1 source"
+          git push
