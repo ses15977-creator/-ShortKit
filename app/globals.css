@@ -636,3 +636,18 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
   .category-grid{grid-template-columns:1fr}
   .category-overlay-copy{left:14px;right:12px;bottom:12px}
 }
+
+
+/* Direct-create shorts captions */
+.short-caption-entry{margin:0 0 20px}
+.short-caption-launch{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr) 24px;gap:14px;align-items:center;text-align:left;padding:16px 18px;border:1px solid #dfe4ee;border-radius:16px;background:linear-gradient(145deg,#fff 0%,#f7f6ff 100%);box-shadow:0 8px 24px rgba(43,51,86,.06)}
+.short-caption-launch:hover{border-color:#b9b3ff;box-shadow:0 12px 28px rgba(77,69,176,.1);transform:translateY(-1px)}
+.short-caption-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:15px;background:#635bff;color:#fff}
+.short-caption-launch strong{display:block;font-size:16px;color:#1e2638}.short-caption-launch small{display:block;margin-top:4px;color:#788397;line-height:1.45}
+.short-caption-builder{margin-top:12px;padding:18px;border:1px solid #dfe3ee;border-radius:16px;background:#fff;box-shadow:0 10px 28px rgba(30,41,70,.06)}
+.short-caption-builder-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}.short-caption-builder-head strong{font-size:15px}.short-caption-builder-head p{margin-top:4px;color:#788397;font-size:12px;line-height:1.5}.short-caption-builder-head>span{flex:0 0 auto;padding:5px 9px;border-radius:999px;background:#f0efff;color:#5b54dd;font-size:11px;font-weight:700}
+.short-caption-file{width:100%;justify-content:center;margin-bottom:10px}
+.short-caption-builder textarea{width:100%;resize:vertical;min-height:150px;border:1px solid #dce2eb;border-radius:12px;padding:12px 13px;font:inherit;line-height:1.6;background:#fbfcfe}
+.short-caption-builder textarea:focus{outline:none;border-color:#746cff;box-shadow:0 0 0 3px rgba(116,108,255,.11)}
+.short-caption-actions{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-top:12px}.short-caption-actions p{color:#7a8496;font-size:12px;line-height:1.5;max-width:66%}.short-caption-actions .primary{flex:0 0 auto}
+@media(max-width:700px){.short-caption-launch{grid-template-columns:46px minmax(0,1fr) 20px;padding:14px}.short-caption-icon{width:46px;height:46px}.short-caption-actions{flex-direction:column;align-items:stretch}.short-caption-actions p{max-width:none}.short-caption-actions .primary{width:100%}.short-caption-builder-head{flex-direction:column}.short-caption-builder-head>span{align-self:flex-start}}
