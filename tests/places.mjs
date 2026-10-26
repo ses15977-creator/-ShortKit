@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {groundedPlaces} from '../lib/shortkit/places.ts';
+const place={name:'테스트식당 성수점',address:'서울 성동구 테스트로 12'};
+const candidate={content:{parts:[{text:JSON.stringify({places:[place,place,{name:'출처없는가게',address:'서울 임의주소 99'}]})}]},groundingMetadata:{webSearchQueries:['성수 테스트식당 주소'],groundingChunks:[{web:{uri:'https://example.com/place',title:'공식 가게 안내'}}],groundingSupports:[{segment:{text:JSON.stringify(place)},groundingChunkIndices:[0]}],searchEntryPoint:{renderedContent:'<div>Google 검색</div>'}}};
+const parsed=groundedPlaces(candidate);assert.equal(parsed.places.length,1);assert.equal(parsed.places[0].name,place.name);assert.equal(parsed.places[0].address,place.address);assert.equal(parsed.places[0].sources[0].url,'https://example.com/place');assert.equal(parsed.searchSuggestions,'<div>Google 검색</div>');
+assert.equal(groundedPlaces({...candidate,groundingMetadata:undefined}).places.length,0);
+assert.equal(groundedPlaces({...candidate,groundingMetadata:{...candidate.groundingMetadata,groundingSupports:[]}}).places.length,0);
+assert.equal(groundedPlaces({...candidate,groundingMetadata:{...candidate.groundingMetadata,groundingChunks:[{web:{uri:'javascript:alert(1)',title:'bad'}}]}}).places.length,0);
+assert.equal(groundedPlaces({...candidate,content:{parts:[{text:'broken JSON'}]}}).places.length,0);
+assert.equal(groundedPlaces({...candidate,content:{parts:[{thought:true,text:'private thought'},{text:JSON.stringify({places:[place]})}]}}).places.length,1);
+console.log('PASS: source-backed address selection, deduplication, no ungrounded results, safe citation links, malformed-response handling.');

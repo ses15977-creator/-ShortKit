@@ -1,0 +1,1 @@
+CREATE INDEX `idx_ai_usage_events_visitor` ON `ai_usage_events` (`visitor`);

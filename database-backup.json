@@ -1,0 +1,587 @@
+{
+  "exported_at": "2026-10-12T05:32:08.015Z",
+  "project_id": "appgprj_6ac71d10e2b881918c3ee37f2de39f03",
+  "binding": "DB",
+  "tables": {
+    "ai_usage_events": {
+      "columns": [
+        "id",
+        "day",
+        "visitor",
+        "action",
+        "model",
+        "input_tokens",
+        "output_tokens",
+        "created_at"
+      ],
+      "rows": [
+        {
+          "id": "0542a608-59f7-4c13-8a2c-010f90e20533",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 29,
+          "output_tokens": 261,
+          "created_at": 1791548837469
+        },
+        {
+          "id": "0f45c15a-bd03-424b-abda-a0a2c1c92736",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 152,
+          "created_at": 1791774181732
+        },
+        {
+          "id": "170ae71f-9faf-4cc2-b893-2ce4bdd7bf05",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 21,
+          "output_tokens": 149,
+          "created_at": 1791775727183
+        },
+        {
+          "id": "1952c52d-c357-4a1b-b1a9-94dc0681ae41",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 27,
+          "output_tokens": 136,
+          "created_at": 1791775719004
+        },
+        {
+          "id": "1a629928-fca0-4e6e-a903-946552da625c",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 22,
+          "output_tokens": 124,
+          "created_at": 1791549723757
+        },
+        {
+          "id": "25844a8d-738c-44b2-84ac-743152e26ad9",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 10699,
+          "output_tokens": 957,
+          "created_at": 1791635955456
+        },
+        {
+          "id": "2a353821-6c5c-4ee9-ac75-e77a521dd7b6",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 23,
+          "output_tokens": 132,
+          "created_at": 1791549799835
+        },
+        {
+          "id": "36b81059-98b9-4c8c-a3fa-b25289af929e",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 28636,
+          "output_tokens": 849,
+          "created_at": 1791555890558
+        },
+        {
+          "id": "398a726a-da72-4fa6-9e8b-2f0040cee204",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 146,
+          "created_at": 1791635868805
+        },
+        {
+          "id": "44934a13-f9ed-40e8-8981-499e0a32b338",
+          "day": "2026-10-10",
+          "visitor": "a5693aa09e3b035ba7650356ef06f6eb686478779ef17c947a3fa4d3eb5a18cc",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 146,
+          "created_at": 1791620398852
+        },
+        {
+          "id": "47244e6d-7c01-4210-80ac-85747b64c4f9",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 21,
+          "output_tokens": 113,
+          "created_at": 1791548699804
+        },
+        {
+          "id": "4b2ffcd8-751a-4f5c-994d-336b8413fb0b",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 96,
+          "created_at": 1791636071947
+        },
+        {
+          "id": "4d0811d5-fa86-4831-b8ea-82f5fea15d48",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 35,
+          "output_tokens": 221,
+          "created_at": 1791775890807
+        },
+        {
+          "id": "4f50ab62-303f-45e6-9a4f-7bbc12fb1527",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 35,
+          "output_tokens": 250,
+          "created_at": 1791636254507
+        },
+        {
+          "id": "581fc866-81ba-4d78-bb7c-18b3bd50b59f",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 108,
+          "created_at": 1791636176726
+        },
+        {
+          "id": "5c770182-a4c7-472d-9fb8-80e7c2a84fc9",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 110,
+          "created_at": 1791548681603
+        },
+        {
+          "id": "5e2c5cf1-4eb0-404d-aee5-d480c5e3b100",
+          "day": "2026-10-10",
+          "visitor": "d84594dc5d2a0e5ad8d9157710da701e68f692e66f0fadd00d6ed1d33319844d",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 138,
+          "created_at": 1791594706033
+        },
+        {
+          "id": "68f100b8-bb50-4eb2-b33d-b5e0b66b0a01",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 137,
+          "created_at": 1791775152004
+        },
+        {
+          "id": "70e88b70-588d-42d5-b56e-6ffc33d79778",
+          "day": "2026-10-11",
+          "visitor": "fd6c4803333d862c178302779adf327d8419a59579c9f138d4c299d93371861c",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 144,
+          "created_at": 1791696216883
+        },
+        {
+          "id": "7e9328ad-2f56-4aa5-96e7-e3507b571435",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 139,
+          "created_at": 1791555750252
+        },
+        {
+          "id": "84301294-d5b5-477f-9f19-2a5ed03e4ab0",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 21,
+          "output_tokens": 124,
+          "created_at": 1791548708736
+        },
+        {
+          "id": "9f1e85f2-ec01-401b-975e-fa32e303fee4",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 27,
+          "output_tokens": 139,
+          "created_at": 1791549728379
+        },
+        {
+          "id": "a222aae4-aad9-425b-9c28-938a70dd42d4",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 21,
+          "output_tokens": 141,
+          "created_at": 1791775722661
+        },
+        {
+          "id": "a5b776ee-0cfc-4c20-bc80-004731093ee3",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 41,
+          "output_tokens": 282,
+          "created_at": 1791775937439
+        },
+        {
+          "id": "a7a53c27-3eff-456a-9d03-08ee9aae1dea",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 28,
+          "output_tokens": 120,
+          "created_at": 1791636064741
+        },
+        {
+          "id": "a9555b88-98fb-438c-96bb-682886b41214",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 10694,
+          "output_tokens": 744,
+          "created_at": 1791637847140
+        },
+        {
+          "id": "c2b6c55c-665b-409f-b07f-3ca530f12c4f",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 15264,
+          "output_tokens": 854,
+          "created_at": 1791549702405
+        },
+        {
+          "id": "c671a590-18c2-4d7f-9182-7d6eb159b4b2",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 25,
+          "output_tokens": 142,
+          "created_at": 1791636068099
+        },
+        {
+          "id": "c8dbd925-25eb-4e96-8388-f00cc929e1c1",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 36,
+          "output_tokens": 271,
+          "created_at": 1791549893686
+        },
+        {
+          "id": "ca46d3eb-521a-4688-9f4e-d6f629ba4b74",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 23,
+          "output_tokens": 151,
+          "created_at": 1791636273087
+        },
+        {
+          "id": "cdb99205-613c-4cf0-a465-49fa107e1edc",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 24,
+          "output_tokens": 145,
+          "created_at": 1791636220914
+        },
+        {
+          "id": "d3f4585c-7041-4af9-bfef-8631c5543177",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 20,
+          "output_tokens": 175,
+          "created_at": 1791548745862
+        },
+        {
+          "id": "d5605f20-2b6c-4fd1-bd8b-46baec8fe8d7",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 123,
+          "created_at": 1791637873163
+        },
+        {
+          "id": "da8d5cd8-fbe2-451d-bd75-fe166d92a3ff",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 22,
+          "output_tokens": 101,
+          "created_at": 1791549719121
+        },
+        {
+          "id": "db492d16-3151-4df1-80b1-0d745c21d65e",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 24,
+          "output_tokens": 136,
+          "created_at": 1791549810240
+        },
+        {
+          "id": "e0d91d22-7cac-4ac2-8d1b-8009ac75943c",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 88,
+          "created_at": 1791548689390
+        },
+        {
+          "id": "e0ec11de-cc85-4753-b06a-4d10812d00dd",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 113,
+          "created_at": 1791637868180
+        },
+        {
+          "id": "e8a4b974-6e79-40db-b0ff-1ca016708902",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 106,
+          "created_at": 1791775714529
+        },
+        {
+          "id": "eeb1fd36-634d-486f-9f71-b461ed0d42aa",
+          "day": "2026-10-12",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 9562,
+          "output_tokens": 747,
+          "created_at": 1791775563649
+        },
+        {
+          "id": "f36cd84b-d92f-4b33-8e6d-effbdbd51aa6",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 18,
+          "output_tokens": 98,
+          "created_at": 1791548721041
+        },
+        {
+          "id": "f7f40a8a-f043-44f3-a93f-4ab381c74347",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "plan",
+          "model": "gemini-3.8-flash",
+          "input_tokens": 15264,
+          "output_tokens": 833,
+          "created_at": 1791548378793
+        },
+        {
+          "id": "f8b1ceeb-f2e2-493f-9af8-e74797ef7bd0",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 134,
+          "created_at": 1791637736514
+        },
+        {
+          "id": "fa7aae82-9bc0-403f-83ff-a5d91e9792c6",
+          "day": "2026-10-09",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 19,
+          "output_tokens": 153,
+          "created_at": 1791547881048
+        },
+        {
+          "id": "febc0d08-f428-4e0b-8323-9ec913b28212",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 24,
+          "output_tokens": 143,
+          "created_at": 1791636214598
+        },
+        {
+          "id": "ffdfceaa-bab3-404c-b6cf-9573ef0f975e",
+          "day": "2026-10-10",
+          "visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "action": "voice",
+          "model": "gemini-3.8-flash-tts",
+          "input_tokens": 22,
+          "output_tokens": 125,
+          "created_at": 1791636075386
+        }
+      ]
+    },
+    "gemini_connections": {
+      "columns": [
+        "user_id",
+        "ciphertext",
+        "iv",
+        "text_model",
+        "tts_model",
+        "verified_at"
+      ],
+      "rows": [
+        {
+          "user_id": "qYukwOdaxDhxG12zugCVmqZnuwPab2vWrZAjLXg0Lwub2RxcJjz6Cp",
+          "ciphertext": "9UjlcZdFl1YWAxVvSvhA4Fn3rcd2diIMKzWEmDXBeZOErFBj3gZUdjcUoTrWzg1S4lg5ornyyjNIlz4G3vSemv6F8on7",
+          "iv": "TCRBGdIT4cIX+zlG",
+          "text_model": "gemini-3.8-flash",
+          "tts_model": "gemini-3.8-flash-tts",
+          "verified_at": 1791456229658
+        }
+      ]
+    },
+    "shared_ai_usage": {
+      "columns": [
+        "day",
+        "visitor",
+        "used"
+      ],
+      "rows": [
+        {
+          "day": "2026-10-09",
+          "visitor": "632e110c5314b84ad7a5b847846d2856646c93011709553e1b4dd7d9d51f325c",
+          "used": 1
+        },
+        {
+          "day": "2026-10-09",
+          "visitor": "__total",
+          "used": 3
+        },
+        {
+          "day": "2026-10-09",
+          "visitor": "d84594dc5d2a0e5ad8d9157710da701e68f692e66f0fadd00d6ed1d33319844d",
+          "used": 2
+        },
+        {
+          "day": "2026-10-10",
+          "visitor": "__total",
+          "used": 8
+        },
+        {
+          "day": "2026-10-10",
+          "visitor": "a5693aa09e3b035ba7650356ef06f6eb686478779ef17c947a3fa4d3eb5a18cc",
+          "used": 7
+        },
+        {
+          "day": "2026-10-10",
+          "visitor": "d84594dc5d2a0e5ad8d9157710da701e68f692e66f0fadd00d6ed1d33319844d",
+          "used": 1
+        },
+        {
+          "day": "2026-10-11",
+          "visitor": "__total",
+          "used": 1
+        },
+        {
+          "day": "2026-10-11",
+          "visitor": "fd6c4803333d862c178302779adf327d8419a59579c9f138d4c299d93371861c",
+          "used": 1
+        }
+      ]
+    },
+    "site_members": {
+      "columns": [
+        "user_id",
+        "provider",
+        "email",
+        "display_name",
+        "usage_visitor",
+        "created_at",
+        "last_seen_at"
+      ],
+      "rows": [
+        {
+          "user_id": "qYukwOdaxDhxG12zugCVmqZnuwPab2vWrZAjLXg0Lwub2RxcJjz6Cp",
+          "provider": "chatgpt",
+          "email": "ses15977@gmail.com",
+          "display_name": "오늘한끼",
+          "usage_visitor": "1e00b31c23d60aca76a3c8e82b84cc7c057508e2a69bbc39a0399e47667e13c3",
+          "created_at": 1791518750297,
+          "last_seen_at": 1791777127120
+        },
+        {
+          "user_id": "vvhAgCFDMNDe1YWlw7st7eIkagHOnfGht66LnMMWuS24o3qamEXh8q",
+          "provider": "chatgpt",
+          "email": "kimhj1307@gmail.com",
+          "display_name": "김현준",
+          "usage_visitor": "5fd86e600b436bf101288a238c20bfc7092e6c43b82eaf0f4c2d9ab93eca249d",
+          "created_at": 1791708678650,
+          "last_seen_at": 1791708694237
+        }
+      ]
+    },
+    "site_settings": {
+      "columns": [
+        "key",
+        "ciphertext",
+        "iv",
+        "updated_at"
+      ],
+      "rows": [
+        {
+          "key": "kakao_local",
+          "ciphertext": "1wepfakawuzQmjIwz8wsO0WFcuKzwxpKoiXHfJQLkLrKmZ0sONzP5JOVtdPvdVlh",
+          "iv": "hRzq9M6cJGDImQPx",
+          "updated_at": 1791633227444
+        }
+      ]
+    }
+  }
+}

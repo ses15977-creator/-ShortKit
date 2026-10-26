@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791437713046,
+      "tag": "0000_lying_liz_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791473971846,
+      "tag": "0001_mute_moondragon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791482786224,
+      "tag": "0002_tearful_jimmy_woo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1791517864918,
+      "tag": "0003_many_hammerhead",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1791517912665,
+      "tag": "0004_early_veda",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1791518103709,
+      "tag": "0005_loving_slipstream",
+      "breakpoints": true
+    }
+  ]
+}
