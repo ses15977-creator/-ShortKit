@@ -1,4 +1,4 @@
-import {env} from 'cloudflare:workers';
+import {runtimeEnv as env} from './runtime-env';
 import {openKey,sealKey} from './key-crypto';
 export type GeminiConnection={apiKey:string;textModel:string;ttsModel:string|null;source:'account'|'server'|'shared'};
 type Bindings={DB?:D1Database;SHORTKIT_KEY_ENCRYPTION_SECRET?:string;GEMINI_API_KEY?:string;GEMINI_MODEL?:string;GEMINI_TTS_MODEL?:string;SHORTKIT_OWNER_USER_ID?:string};
