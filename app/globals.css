@@ -779,3 +779,16 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .short-caption-cue-position{grid-template-columns:80px minmax(0,1fr)}
  .short-caption-cues-head{align-items:flex-start;flex-direction:column}
 }
+
+
+/* Smooth single-video subtitle sync preview */
+.short-caption-video-stage{position:relative;overflow:hidden;border-radius:14px;background:#0f172a}
+.short-caption-video-stage video{display:block;width:100%;max-height:420px;background:#0f172a}
+.short-caption-live-overlay{
+  position:absolute;left:8%;right:8%;z-index:2;text-align:center;color:#fff;font-weight:900;
+  font-size:clamp(18px,2vw,30px);line-height:1.25;text-shadow:0 2px 3px rgba(0,0,0,.95),0 0 8px rgba(0,0,0,.85);
+  pointer-events:none;word-break:keep-all
+}
+.short-caption-live-overlay.top{top:8%}
+.short-caption-live-overlay.middle{top:50%;transform:translateY(-50%)}
+.short-caption-live-overlay.bottom{bottom:10%}
