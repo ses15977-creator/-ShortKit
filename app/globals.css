@@ -373,3 +373,33 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
 /* V2.0.20.1 deployment verification badge */
 .v2-brand-button{gap:10px}.v2-build-badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:linear-gradient(135deg,#3158ff,#7a45f4);color:#fff;font-size:10px;font-weight:900;letter-spacing:.02em;box-shadow:0 4px 12px rgba(73,66,220,.18)}
 @media(max-width:640px){.v2-build-badge{height:20px;padding:0 7px;font-size:9px}}
+
+
+/* Quick create visual card refresh - isolated preview branch */
+.v2-quick-page{width:min(100%,1180px);padding-top:42px}
+.v2-quick-head h1{font-size:38px;line-height:1.15;letter-spacing:-1.8px}
+.v2-quick-card{border-radius:26px;box-shadow:0 18px 54px rgba(27,39,71,.08)}
+.v2-quick-section{padding:32px}
+.v2-category-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.v2-category-row label{position:relative;display:block;min-height:0;padding:0;overflow:hidden;border:1px solid #e3e7ef;border-radius:20px;background:#fff;color:#1d2638;box-shadow:0 8px 28px rgba(27,39,71,.06);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.v2-category-row label:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(27,39,71,.1)}
+.v2-category-row label.selected{border-color:#635bff;background:#fff;box-shadow:0 0 0 2px rgba(99,91,255,.16),0 14px 36px rgba(49,45,129,.12)}
+.v2-category-image{display:block;width:100%;aspect-ratio:16/9;overflow:hidden;background:#eef2f6}
+.v2-category-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.v2-category-row label:hover .v2-category-image img{transform:scale(1.025)}
+.v2-category-copy{position:relative;display:block;min-height:92px;padding:17px 46px 16px 18px;text-align:left}
+.v2-category-label{display:flex;align-items:center;gap:9px;color:#172033}
+.v2-category-label svg{width:34px;height:34px;padding:8px;border-radius:11px;background:#eef1ff;color:#635bff}
+.v2-category-row strong{font-size:16px;letter-spacing:-.35px}
+.v2-category-copy small{display:block;margin:7px 0 0 43px;color:#7b879a;font-size:12px;line-height:1.45}
+.v2-category-arrow{position:absolute;right:18px;top:50%;transform:translateY(-50%);color:#9ba6b7}
+.v2-category-row label.selected .v2-category-label svg{background:#635bff;color:#fff}
+.v2-category-row label.selected .v2-category-arrow{color:#635bff}
+@media (max-width:760px){
+ .v2-quick-page{padding:28px 14px 112px}
+ .v2-quick-head{gap:14px}.v2-quick-head h1{font-size:30px}
+ .v2-quick-section{grid-template-columns:38px 1fr;gap:10px;padding:22px 16px}
+ .v2-category-row{grid-template-columns:1fr;gap:12px}
+ .v2-category-copy{min-height:84px;padding:15px 42px 14px 15px}
+ .v2-category-copy small{margin-left:43px}
+}
