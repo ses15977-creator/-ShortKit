@@ -722,3 +722,26 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .short-caption-text strong{font-size:17px}
  .short-caption-text small{font-size:11px}
 }
+
+
+/* AI quick-create category selection check */
+.v2-category-check{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:3;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.94);
+  border:2px solid rgba(255,255,255,.92);
+  color:#6d63ff;
+  box-shadow:0 4px 12px rgba(0,0,0,.22);
+}
+.v2-category-check.active{
+  background:#6d63ff;
+  color:#fff;
+  border-color:#fff;
+}
