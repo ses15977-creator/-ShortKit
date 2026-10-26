@@ -1,4 +1,4 @@
-import {env} from 'cloudflare:workers';
+import {runtimeEnv as env} from './runtime-env';
 import {sealKey,openKey} from './key-crypto';
 export type GoogleMember={userId:string;email:string;displayName:string;provider:'google'};
 type AuthEnv={GOOGLE_OAUTH_CLIENT_ID?:string;GOOGLE_OAUTH_CLIENT_SECRET?:string;SHORTKIT_KEY_ENCRYPTION_SECRET?:string};
