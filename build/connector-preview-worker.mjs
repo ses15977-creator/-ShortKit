@@ -1,4 +1,4 @@
-import { WorkerEntrypoint } from "cloudflare:workers";
+class WorkerEntrypoint {}
 import binding from "virtual:sites-connector-preview";
 
 // Local-only RPC target. The Site entrypoint scopes it to each request; the Node
