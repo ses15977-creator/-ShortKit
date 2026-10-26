@@ -7,10 +7,19 @@ import {groundedPlaces,type GroundedCandidate} from '@/lib/shortkit/places';
 export const dynamic='force-dynamic';
 const searchCache=new Map<string,{expires:number;data:ReturnType<typeof groundedPlaces>}>();
 const pending=new Map<string,Promise<Response>>();
+function validRequestOrigin(request:Request){
+ const origin=request.headers.get('origin');
+ if(!origin)return true;
+ try{
+  const originHost=new URL(origin).host.toLowerCase();
+  const forwarded=(request.headers.get('x-forwarded-host')||request.headers.get('host')||new URL(request.url).host).split(',')[0].trim().toLowerCase();
+  return !!forwarded&&originHost===forwarded;
+ }catch{return false;}
+}
 async function handlePost(request:Request){
  // Scope cache and in-flight requests to the verified account, never to client identity.
  const user=await getSiteUser();
- if(request.headers.get('origin')!==new URL(request.url).origin)return json({error:'요청 출처가 올바르지 않습니다.'},403);
+ if(!validRequestOrigin(request))return json({error:'요청 출처가 올바르지 않습니다.'},403);
  const raw=await request.clone().text();if(raw.length>2048)return json({error:'검색어가 너무 깁니다.'},413);
  let query='';try{const b=JSON.parse(raw);query=typeof b.query==='string'?b.query.trim().normalize('NFC').replace(/\s+/g,' '):'';}catch{return json({error:'검색어를 확인해 주세요.'},400);}
  if(query.length<2||query.length>120)return json({error:'가게 이름과 지역을 2~120자로 입력해 주세요.'},400);
@@ -28,7 +37,7 @@ async function handlePost(request:Request){
 const json=(data:unknown,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store'}});
 async function performSearch(request:Request){try{
  const user=await getSiteUser();
- if(request.headers.get('origin')!==new URL(request.url).origin)return json({error:'요청 출처가 올바르지 않습니다.'},403);
+ if(!validRequestOrigin(request))return json({error:'요청 출처가 올바르지 않습니다.'},403);
  if(Number(request.headers.get('content-length')||0)>2048)return json({error:'검색어가 너무 깁니다.'},413);
  const raw=await request.text();if(raw.length>2048)return json({error:'검색어가 너무 깁니다.'},413);
  let body;try{body=JSON.parse(raw);}catch{return json({error:'검색어를 확인해 주세요.'},400);}
