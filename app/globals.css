@@ -403,3 +403,58 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .v2-category-copy{min-height:84px;padding:15px 42px 14px 15px}
  .v2-category-copy small{margin-left:43px}
 }
+
+
+/* Quick + manual photoreal category cards — fix image cropping */
+.v2-category-row label{
+  position:relative;
+  min-height:0;
+  overflow:hidden;
+  border-radius:20px;
+}
+.v2-category-image{
+  position:relative;
+  width:100%;
+  height:auto !important;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#eef2f6;
+}
+.v2-category-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+}
+.v2-category-copy{
+  min-height:96px;
+}
+.category-card{
+  position:relative;
+  padding:0 0 18px;
+  min-height:0;
+  overflow:hidden;
+}
+.category-visual{
+  position:relative;
+  width:100%;
+  height:auto !important;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  margin-bottom:14px;
+  background:#eef2f6;
+}
+.category-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+}
+.category-card>.category-icon{margin-top:0}
+@media(max-width:720px){
+  .v2-category-row{grid-template-columns:1fr}
+  .v2-category-image,.category-visual{aspect-ratio:16/9;height:auto !important}
+  .category-card{min-height:0}
+}
