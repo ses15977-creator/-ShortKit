@@ -2,7 +2,7 @@ import {cookies} from 'next/headers';
 import {getChatGPTUser} from './chatgpt-auth';
 import {readSession,sessionCookieName} from '@/lib/shortkit/google-auth';
 import {isShortkitOwner} from '@/lib/shortkit/gemini-server';
-import {env} from 'cloudflare:workers';
+import {runtimeEnv as env} from '@/lib/shortkit/runtime-env';
 import {memberVisitorId} from '@/lib/shortkit/shared-quota';
 export type SiteUser={userId:string;email:string;displayName:string;provider:'google'|'chatgpt'};
 export async function getSiteUser():Promise<SiteUser|null>{const chatgpt=await getChatGPTUser();if(isShortkitOwner(chatgpt?.userId,chatgpt?.email))return chatgpt?{...chatgpt,provider:'chatgpt'}:null;const store=await cookies();const google=await readSession(store.get(sessionCookieName())?.value);if(google)return google;return chatgpt?{...chatgpt,provider:'chatgpt'}:null;}
