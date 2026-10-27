@@ -16,7 +16,7 @@ const administratorEmails=new Set(['ses15977@gmail.com','kimhj1307@gmail.com']);
 export function isShortkitOwner(userId:string|undefined,email?:string){return !!userId&&((!!bindings().SHORTKIT_OWNER_USER_ID&&userId===bindings().SHORTKIT_OWNER_USER_ID)||administratorEmails.has(email?.trim().toLowerCase()||''));}
 export async function getSharedGeminiConnection(userId?:string,email?:string):Promise<GeminiConnection|null>{
  const ownerId=bindings().SHORTKIT_OWNER_USER_ID;
- if(!ownerId)return userId?getGeminiConnection(userId):null;
+ if(!ownerId){const key=await getGeminiConnection(userId||'');return key?{...key,source:userId?'account':'server'}:null;}
  const key=await getGeminiConnection(ownerId);
  if(!key)return null;
  // Google rejects Gemini 2.5 Flash for new users; retain the verified saved model.
