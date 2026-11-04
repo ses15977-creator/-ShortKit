@@ -1524,3 +1524,43 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
 /* Never recolor the actual media canvas or sample swatches. */
 :root[data-sk-theme="dark"] :is(video,canvas,img,.screen,.type-sample,
  .effect-swatch,.outline-swatch,.basic-font-swatch){filter:none!important}
+
+/* Tablet QA: keep editor brand and toolbar text horizontal instead of squeezing into vertical syllables. */
+@media (min-width:701px) and (max-width:1250px){
+ .topbar{
+  height:auto!important;min-height:126px;padding:15px 22px 12px!important;
+  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+  align-items:stretch!important;justify-content:center!important;gap:11px!important;
+ }
+ .topbar .brand.v2-brand-button{
+  align-self:flex-start;display:inline-flex!important;flex-direction:row!important;
+  flex-wrap:nowrap!important;align-items:center!important;gap:10px;min-width:0;
+  max-width:100%;white-space:nowrap!important;
+ }
+ .topbar .brand.v2-brand-button>strong{
+  display:inline-flex!important;flex-direction:row!important;align-items:center!important;
+  white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;
+  writing-mode:horizontal-tb!important;flex-shrink:0;
+ }
+ .topbar .brand.v2-brand-button .brand-icon{flex-shrink:0}
+ .topbar .top-actions{
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important;
+  width:100%!important;min-width:0;
+ }
+ .topbar .top-actions>button,.topbar .top-actions>a{
+  box-sizing:border-box;display:inline-flex!important;align-items:center!important;
+  justify-content:center!important;flex:0 0 auto!important;width:auto!important;
+  max-width:100%;min-width:max-content;min-height:44px!important;height:44px!important;
+  padding:0 13px!important;white-space:nowrap!important;word-break:keep-all!important;
+  overflow-wrap:normal!important;writing-mode:horizontal-tb!important;
+  line-height:1.3!important;font-size:13px!important;
+ }
+ .topbar .top-actions button span{display:inline!important;white-space:nowrap!important}
+ .topbar .top-actions .guide-link{height:44px!important}
+ .member-strip{height:auto;min-height:44px;display:flex;justify-content:flex-end;
+  flex-wrap:wrap;align-items:center;gap:8px 16px;padding:8px 20px;line-height:1.5;
+  overflow-wrap:anywhere}
+ .member-strip>span{min-width:0}
+ .member-strip>a{flex-shrink:0;white-space:nowrap}
+}
