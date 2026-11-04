@@ -2356,3 +2356,47 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
  .v2-entry .v2-draft strong{font-size:13px!important}
  .v2-entry .v2-draft span{font-size:11px!important}
 }
+
+/* Narrow tablets (650-759 logical CSS px): compact icon rail semantics. */
+@media(min-width:650px) and (max-width:759px){
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button{
+  order:0!important;max-width:50px!important;width:50px!important;
+  align-self:center!important;justify-content:center!important;overflow:hidden!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button>strong,
+ :root[data-sk-layout="sidebar"] .topbar .v2-build-badge{display:none!important}
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a{
+  height:44px!important;min-height:44px!important;width:100%!important;
+  font-size:0!important;display:flex!important;justify-content:center!important;
+  padding:9px!important;overflow:hidden!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a.guide-link:before{
+  content:"?";font-size:19px;font-weight:850;color:#e5ecff;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>a.guide-link:before{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>a,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>button{
+  font-size:13px!important;justify-content:flex-start!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-heading{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-stage-heading{display:block!important}
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button{
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  padding:8px 5px!important;width:100%!important;gap:0!important;
+  min-height:43px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button>b{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-stage-group .steps>button{
+  justify-content:flex-start!important;padding:8px 12px!important;gap:12px!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-stage-group .steps>button>b{display:inline!important}
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-mobile-tools>button>span{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-mobile-tools>button>span{display:inline!important}
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch>span{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-layout-switch>span{display:inline!important}
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-close{display:none!important}
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-close{
+  display:inline-flex!important;position:absolute!important;top:14px!important;right:13px!important;
+ }
+}
