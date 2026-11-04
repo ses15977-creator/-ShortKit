@@ -1822,3 +1822,18 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
   outline:2px solid #94aaff;outline-offset:2px;
  }
 }
+
+/* Initial mode selection participates in the sidebar layout as well. */
+@media(min-width:1100px){
+ :root[data-sk-layout="sidebar"] body:has(.sk-choose-sidebar) .v2-entry{
+  box-sizing:border-box;width:calc(100% - 245px)!important;
+  margin-left:245px!important;min-height:calc(100dvh - 44px);
+  padding-left:clamp(26px,4vw,55px)!important;
+  padding-right:clamp(26px,4vw,55px)!important;
+ }
+}
+@media(max-width:1099px){
+ :root[data-sk-layout="sidebar"] body:has(.sk-choose-sidebar) .v2-entry{
+  padding-top:105px!important;
+ }
+}
