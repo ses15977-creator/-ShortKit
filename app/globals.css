@@ -2400,3 +2400,265 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
   display:inline-flex!important;position:absolute!important;top:14px!important;right:13px!important;
  }
 }
+
+/* Tablet navigation readability and theme QA (2026-11-05).
+   At a tablet viewport show readable labels permanently, not only an icon rail.
+   Phones <=649px preserve the compact slide-out drawer. */
+@media (min-width:650px) and (max-width:1099px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar{
+  box-sizing:border-box!important;
+  width:208px!important;min-width:208px!important;max-width:208px!important;
+  padding:72px 13px 16px!important;gap:12px!important;
+  align-items:stretch!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  scrollbar-width:thin!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] body:has(.topbar) .topbar{
+  width:260px!important;min-width:260px!important;max-width:260px!important;
+  padding:67px 15px 16px!important;
+ }
+ :root[data-sk-layout="sidebar"] .sk-side-opener{
+  width:auto!important;min-width:100px!important;
+  padding:8px 12px!important;top:13px!important;left:14px!important;
+  justify-content:flex-start!important;
+ }
+ :root[data-sk-layout="sidebar"] .sk-side-opener>span{display:inline!important;font-size:12px!important}
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button{
+  order:0!important;align-self:stretch!important;
+  display:flex!important;flex:0 0 auto!important;flex-direction:row!important;
+  min-height:52px!important;width:100%!important;max-width:100%!important;
+  padding:3px!important;gap:9px!important;justify-content:flex-start!important;
+  overflow:visible!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button .brand-icon{
+  flex:0 0 40px!important;width:40px!important;height:40px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button>strong{
+  display:flex!important;flex-direction:column!important;
+  font-size:20px!important;line-height:1.1!important;white-space:nowrap!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button>strong>span{
+  display:block!important;font-size:9px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .v2-build-badge{display:none!important}
+ :root[data-sk-layout="sidebar"] .topbar .top-actions{
+  order:1!important;display:flex!important;flex:0 0 auto!important;
+  flex-direction:column!important;gap:4px!important;width:100%!important;
+  max-width:100%!important;min-width:0!important;padding-bottom:12px!important;
+  border-bottom:1px solid var(--sk-rail-divider,#3f506e)!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>a{
+  display:flex!important;flex:0 0 auto!important;flex-direction:row!important;
+  justify-content:flex-start!important;align-items:center!important;
+  gap:10px!important;box-sizing:border-box!important;
+  width:100%!important;height:41px!important;min-height:41px!important;
+  padding:8px 11px!important;overflow:hidden!important;
+  white-space:nowrap!important;font-size:12px!important;
+  font-weight:750!important;line-height:1.3!important;
+  border-radius:10px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>button>span,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>button>span{
+  display:inline!important;font-size:12px!important;white-space:nowrap!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a.guide-link,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .top-actions>a.guide-link{
+  font-size:12px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a.guide-link:before{
+  display:none!important;content:none!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group{
+  flex:0 0 auto!important;order:2!important;
+  padding-top:6px!important;gap:7px!important;overflow:visible!important;
+  min-height:0!important;width:100%!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-heading{
+  display:block!important;font-size:11px!important;padding:0 9px 6px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps{
+  display:flex!important;flex-direction:column!important;gap:5px!important;
+  width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-stage-group .steps>button{
+  display:flex!important;flex-direction:row!important;flex:0 0 auto!important;
+  align-items:center!important;justify-content:flex-start!important;
+  gap:10px!important;width:100%!important;min-height:42px!important;
+  height:42px!important;padding:7px 10px!important;text-align:left!important;
+  box-sizing:border-box!important;white-space:nowrap!important;border-radius:10px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button>span{
+  display:inline-flex!important;flex:0 0 27px!important;
+  width:27px!important;height:27px!important;
+  justify-content:center!important;align-items:center!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button>b,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-stage-group .steps>button>b{
+  display:inline!important;flex:1!important;min-width:0!important;
+  font-size:12px!important;line-height:1.3!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;white-space:nowrap!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-mobile-tools{
+  order:3!important;flex:0 0 auto!important;margin-top:10px!important;gap:6px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-mobile-tools>button,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-mobile-tools>button{
+  width:100%!important;display:flex!important;justify-content:flex-start!important;
+  gap:9px!important;min-height:39px!important;padding:8px 10px!important;
+  box-sizing:border-box!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-mobile-tools>button>span,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-sidebar-mobile-tools>button>span{
+  display:inline!important;font-size:11px!important;white-space:nowrap!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-layout-switch{
+  order:4!important;width:100%!important;min-height:40px!important;
+  margin-top:0!important;display:inline-flex!important;gap:7px!important;
+  justify-content:center!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch>span,
+ :root[data-sk-layout="sidebar"][data-sk-drawer="open"] .topbar .sk-layout-switch>span{
+  display:inline!important;font-size:11px!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .member-strip{
+  margin-left:208px!important;width:calc(100% - 208px)!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) :is(.workspace,.v2-quick-page,.v2-result-page){
+  box-sizing:border-box!important;margin-left:208px!important;margin-right:0!important;
+  width:calc(100% - 208px)!important;max-width:none!important;
+  padding-left:clamp(14px,2vw,32px)!important;
+  padding-right:clamp(14px,2vw,32px)!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.sk-choose-sidebar) .v2-entry{
+  box-sizing:border-box!important;margin-left:208px!important;
+  width:calc(100% - 208px)!important;
+  padding-left:18px!important;padding-right:18px!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .bottom-bar{left:208px!important}
+}
+/* All breakpoints: make the sidebar follow the selected light/dark theme,
+   including the disabled buttons that were rendering as bright white rectangles. */
+:root[data-sk-layout="sidebar"][data-sk-theme="light"]{
+ --sk-rail-divider:#cbd5e5;
+ --sk-rail-bg:#f0f4fc;
+ --sk-rail-ink:#24334f;
+ --sk-rail-muted:#61728c;
+ --sk-rail-item:#e3eaf5;
+ --sk-rail-border:#c5cfe1;
+}
+:root[data-sk-layout="sidebar"][data-sk-theme="dark"]{
+ --sk-rail-divider:#384a68;
+ --sk-rail-bg:#141e32;
+ --sk-rail-ink:#e9f0ff;
+ --sk-rail-muted:#aebcda;
+ --sk-rail-item:#253750;
+ --sk-rail-border:#4b6082;
+}
+@media(min-width:650px){
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .topbar{
+  background:#f0f4fc!important;background-image:linear-gradient(155deg,#f7f9ff,#e9eef9)!important;
+  color:#24334f!important;border-right:1px solid #c6d1e4!important;
+  box-shadow:3px 0 18px #26344a12!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button>strong{
+  color:#223453!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button>strong>span{
+  color:#5948ad!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group{
+  border-color:#cbd5e5!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-heading{
+  color:#64738f!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools>button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-layout-switch{
+  background:#e3eaf5!important;background-image:none!important;
+  border:1px solid #c8d3e5!important;color:#24334f!important;
+  box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button:disabled,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a[aria-disabled="true"]{
+  background:#dce5f2!important;color:#71809b!important;
+  border-color:#cbd5e6!important;opacity:.65!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button svg,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a svg,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-layout-switch svg,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools svg{
+  color:#40547a!important;stroke:#40547a!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button:hover:not(:disabled),
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a:hover,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools>button:hover{
+  background:#d8e1f2!important;color:#24334f!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button{
+  background:transparent!important;color:#455775!important;
+  border:1px solid transparent!important;box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button>b{
+  color:inherit!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button>span{
+  background:#dce5f3!important;color:#415376!important;
+  border:1px solid #b4c3db!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.done{
+  background:#e7edfa!important;color:#455a7a!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.done>span{
+  background:#c7d6ee!important;color:#304567!important;border-color:#a7bada!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.active,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button[aria-current="step"]{
+  background:#dedbff!important;border:1px solid #b2a7f5!important;color:#33266e!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.active>span{
+  background:#6552d8!important;color:#fff!important;border-color:#7562eb!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button:hover:not(:disabled):not(.active){
+  background:#dce6f8!important;color:#25385c!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .sk-theme-toggle{
+  background:#e6e3ff!important;color:#40338c!important;border:1px solid #b8b1e9!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .top-actions>button:disabled{
+  background:#202e46!important;color:#94a7c7!important;
+  border:1px solid #344964!important;opacity:.65!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button:not(.active){
+  background:#1f2d45!important;color:#c3d0e8!important;
+  border:1px solid #354967!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button.done{
+  background:#273954!important;color:#e3ebff!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button.active{
+  background:#483b80!important;color:#fff!important;border:1px solid #6558ad!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button>span{
+  color:#e9f0ff!important;
+ }
+}
+/* Keep the tablet expanded sidebar fully within the viewport. */
+@media(min-width:650px) and (max-width:1099px) and (max-height:740px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar{gap:7px!important}
+ :root[data-sk-layout="sidebar"] .topbar .top-actions{gap:2px!important;padding-bottom:8px!important}
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"] .topbar .top-actions>a{min-height:37px!important;height:37px!important}
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group .steps>button{
+  min-height:36px!important;height:36px!important;
+ }
+}
