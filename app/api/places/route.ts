@@ -2,6 +2,7 @@ import {isShortkitOwner} from '@/lib/shortkit/gemini-server';
 import {getKakaoKey,searchKakao} from '@/lib/shortkit/kakao-server';
 import {reserveSharedUsage,recordAiUsage,SharedQuotaError} from '@/lib/shortkit/shared-quota';
 import {getSiteUser} from '../../site-auth';
+import {googleEnabled} from '@/lib/shortkit/google-auth';
 import {getSharedGeminiConnection} from '@/lib/shortkit/gemini-server';
 import {groundedPlaces,type GroundedCandidate} from '@/lib/shortkit/places';
 export const dynamic='force-dynamic';
@@ -19,6 +20,7 @@ function validRequestOrigin(request:Request){
 async function handlePost(request:Request){
  // Scope cache and in-flight requests to the verified account, never to client identity.
  const user=await getSiteUser();
+ if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&await googleEnabled()&&user?.provider!=='google')return json({error:'로그인이 필요합니다.'},401);
  if(!validRequestOrigin(request))return json({error:'요청 출처가 올바르지 않습니다.'},403);
  const raw=await request.clone().text();if(raw.length>2048)return json({error:'검색어가 너무 깁니다.'},413);
  let query='';try{const b=JSON.parse(raw);query=typeof b.query==='string'?b.query.trim().normalize('NFC').replace(/\s+/g,' '):'';}catch{return json({error:'검색어를 확인해 주세요.'},400);}
