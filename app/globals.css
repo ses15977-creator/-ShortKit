@@ -1564,3 +1564,78 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
  .member-strip>span{min-width:0}
  .member-strip>a{flex-shrink:0;white-space:nowrap}
 }
+
+/* Dark editor stage navigation 1-5 (and 3-step shorts): real classes are active / done.
+   Prevent global button hover from turning a dark active tab pale gray. */
+:root[data-sk-theme="dark"] .steps{
+ border-bottom:1px solid #344866!important;
+}
+:root[data-sk-theme="dark"] .steps>button{
+ box-sizing:border-box;
+ color:#b7c8e2!important;
+ background:transparent!important;
+ border-color:transparent!important;
+ min-width:0;
+}
+:root[data-sk-theme="dark"] .steps>button>b{
+ color:inherit!important;
+ font-weight:750;
+ white-space:nowrap;
+}
+:root[data-sk-theme="dark"] .steps>button>span{
+ background:#223451!important;
+ border:1px solid #425b7e!important;
+ color:#dae6ff!important;
+ flex-shrink:0;
+}
+:root[data-sk-theme="dark"] .steps>button.done{
+ color:#e0eaff!important;
+ background:transparent!important;
+}
+:root[data-sk-theme="dark"] .steps>button.done>span{
+ background:#304b72!important;
+ border-color:#607da9!important;
+ color:#fff!important;
+}
+:root[data-sk-theme="dark"] .steps>button.active,
+:root[data-sk-theme="dark"] .steps>button[aria-current="step"]{
+ background:#253a62!important;
+ color:#f2f6ff!important;
+ border-radius:12px 12px 0 0;
+}
+:root[data-sk-theme="dark"] .steps>button.active>b,
+:root[data-sk-theme="dark"] .steps>button[aria-current="step"]>b{
+ color:#fff!important;
+}
+:root[data-sk-theme="dark"] .steps>button.active>span,
+:root[data-sk-theme="dark"] .steps>button[aria-current="step"]>span{
+ background:linear-gradient(135deg,#5368ff,#795bfa)!important;
+ border-color:#9cacf9!important;
+ color:#fff!important;
+}
+:root[data-sk-theme="dark"] .steps>button.active:after{
+ background:#6e87ff!important;
+}
+:root[data-sk-theme="dark"] .steps>button:hover:not(:disabled):not(.active){
+ background:#1e3150!important;
+ color:#fff!important;
+}
+:root[data-sk-theme="dark"] .steps>button.active:hover:not(:disabled){
+ background:#304a76!important;
+ color:#fff!important;
+}
+:root[data-sk-theme="dark"] .steps>button:hover>b{color:inherit!important}
+:root[data-sk-theme="dark"] .steps>button:focus-visible{
+ outline:2px solid #9db0ff;outline-offset:2px;
+}
+@media(max-width:700px){
+ :root[data-sk-theme="dark"] .steps>button{
+  padding:8px 3px 14px;
+  border-radius:10px 10px 0 0;
+ }
+ :root[data-sk-theme="dark"] .steps>button>b{
+  font-size:11px;
+  overflow-wrap:normal;
+  white-space:nowrap;
+ }
+}
