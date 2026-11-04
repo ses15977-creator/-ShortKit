@@ -1,15 +1,14 @@
 import Studio from './studio';
 import {getSiteUser,registerMember} from './site-auth';
 import GuideWelcome from './welcome-guide';
-import {googleEnabled} from '@/lib/shortkit/google-auth';
 import {redirect} from 'next/navigation';
 export const dynamic='force-dynamic';
 
 export default async function Page(){
   const user=await getSiteUser();
-  if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&await googleEnabled()&&user?.provider!=='google')redirect('/login');
+  if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&user?.provider!=='google')redirect('/login');
   if(user)await registerMember(user);
-  const enabled=!user&&await googleEnabled();
+  const enabled=!user;
   return <>
     {(user||enabled)&&<div className="member-strip">
       {user?<>
