@@ -2,7 +2,6 @@ import {isShortkitOwner} from '@/lib/shortkit/gemini-server';
 import {getKakaoKey,searchKakao} from '@/lib/shortkit/kakao-server';
 import {reserveSharedUsage,recordAiUsage,SharedQuotaError} from '@/lib/shortkit/shared-quota';
 import {getSiteUser} from '../../site-auth';
-import {googleEnabled} from '@/lib/shortkit/google-auth';
 import {getSharedGeminiConnection} from '@/lib/shortkit/gemini-server';
 import {groundedPlaces,type GroundedCandidate} from '@/lib/shortkit/places';
 export const dynamic='force-dynamic';
@@ -20,7 +19,7 @@ function validRequestOrigin(request:Request){
 async function handlePost(request:Request){
  // Scope cache and in-flight requests to the verified account, never to client identity.
  const user=await getSiteUser();
- if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&await googleEnabled()&&user?.provider!=='google')return json({error:'로그인이 필요합니다.'},401);
+ if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&user?.provider!=='google')return json({error:'로그인이 필요합니다.'},401);
  if(!validRequestOrigin(request))return json({error:'요청 출처가 올바르지 않습니다.'},403);
  const raw=await request.clone().text();if(raw.length>2048)return json({error:'검색어가 너무 깁니다.'},413);
  let query='';try{const b=JSON.parse(raw);query=typeof b.query==='string'?b.query.trim().normalize('NFC').replace(/\s+/g,' '):'';}catch{return json({error:'검색어를 확인해 주세요.'},400);}
@@ -58,6 +57,6 @@ async function performSearch(request:Request){try{
  const data=await response.json() as {candidates?:GroundedCandidate[];usageMetadata?:{promptTokenCount?:number;candidatesTokenCount?:number}};await recordAiUsage(request,user?.userId,'places',connection.textModel,data.usageMetadata);return json(groundedPlaces(data.candidates?.[0]));
  }catch(e){if(e instanceof SharedQuotaError)return json({error:e.message},429);if(e instanceof Error&&(e.name==='TimeoutError'||e.name==='AbortError'))return json({error:'검색 시간이 초과되었거나 취소되었습니다. 다시 시도해 주세요.'},504);return json({error:'가게 검색을 완료하지 못했습니다. 직접 입력하거나 잠시 후 다시 시도해 주세요.'},502);}}
 
-export async function GET(){try{const user=await getSiteUser();const kakao=!!await getKakaoKey();const fallback=!!await getSharedGeminiConnection(user?.userId,user?.email);return json({connected:kakao||fallback,provider:kakao?'kakao':fallback?'gemini':null});}catch{return json({connected:false,provider:null});}}
+export async function GET(){try{const user=await getSiteUser();if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&user?.provider!=='google')return json({error:'로그인이 필요합니다.',connected:false},401);const kakao=!!await getKakaoKey();const fallback=!!await getSharedGeminiConnection(user?.userId,user?.email);return json({connected:kakao||fallback,provider:kakao?'kakao':fallback?'gemini':null});}catch{return json({connected:false,provider:null});}}
 
 export async function POST(request:Request){try{const user=await getSiteUser();const response=await handlePost(request);if(response.ok||isShortkitOwner(user?.userId,user?.email))return response;try{const data=await response.clone().json() as {error?:string};if(typeof data.error==='string'&&(/가게 주소 검색 연결/.test(data.error)||/^카카오 /.test(data.error)||/^카카오/.test(data.error)))return Response.json(data,{status:response.status,headers:{'Cache-Control':'no-store'}});if(typeof data.error==='string'&&/Gemini|Google|gemini-|한도|사용량|결제|비용|모델|429/.test(data.error))return Response.json({error:'가게 주소 검색 연결을 확인해 주세요. Kakao Local API가 연결되면 Google 로그인 없이 검색할 수 있습니다.'},{status:response.status,headers:{'Cache-Control':'no-store'}});}catch{}return response;}catch(e){console.error('Shortkit places POST failed before response',{message:e instanceof Error?e.message:String(e)});return Response.json({error:'가게 검색 서버 연결을 확인하지 못했습니다. 직접 입력은 계속 사용할 수 있습니다.'},{status:500,headers:{'Cache-Control':'no-store'}});}}
