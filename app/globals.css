@@ -846,3 +846,13 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
   .v2-quick-section {grid-template-columns:32px minmax(0,1fr)}
   .v2-quick-place-wrap > .place-search {padding:14px}
 }
+
+/* Google login entry is deliberately above the mobile editor and cannot be covered by page decorations. */
+.mobile-login-notice{display:none}
+@media(max-width:700px){
+ .member-strip{position:relative;z-index:30;min-height:48px;padding:9px 16px;background:#edf2ff}
+ .member-strip>a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;touch-action:manipulation}
+ .mobile-login-notice{position:relative;z-index:21;display:flex;flex-direction:column;align-items:stretch;gap:12px;margin:12px 14px 0;padding:18px;background:#fff;border:1px solid #cbd6ff;border-radius:14px;box-shadow:0 5px 20px #172aef12;text-align:center}
+ .mobile-login-notice strong{font-size:14px;color:#1d328e}
+ .mobile-login-notice a{display:flex;align-items:center;justify-content:center;min-height:50px;padding:10px 15px;border-radius:10px;background:#162aef;color:#fff;font-size:15px;font-weight:750;touch-action:manipulation}
+}
