@@ -1287,3 +1287,83 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
 :root[data-sk-theme="dark"] .style-card .type-sample{background:#22314c!important}
 :root[data-sk-theme="dark"] .settings-block{background:#19253c!important}
 :root[data-sk-theme="dark"] :is(.effect-choice,.style-card,.segmented label,.outline-choice,.basic-font-choice){transition:background .15s,color .15s,border-color .15s}
+
+/* Dark mode palette consolidation: remove ivory/beige and high-glare white from editor chrome. */
+:root[data-sk-theme="dark"]{
+ --sk-night-surface:#19253c;--sk-night-raised:#22314c;--sk-night-selected:#30466d;
+ --sk-night-border:#435677;--sk-night-text:#e9f0ff;--sk-night-muted:#b7c6df;
+}
+:root[data-sk-theme="dark"] :is(
+ .no-music,.music-choice,.user-music-upload,.selected-music,.final-music-summary,
+ .voice-listen,.connection-note,.gemini-connect-card,.gemini-connect-card.connected,
+ .upload-zone,.music-options,.effect-settings,.basic-font-settings,.outline-settings,
+ .music-preview-button,.round-button,.upload-icon,.gemini-symbol
+){
+ background:var(--sk-night-raised)!important;
+ color:var(--sk-night-text)!important;
+ border-color:var(--sk-night-border)!important;
+}
+:root[data-sk-theme="dark"] :is(.no-music.selected,.music-choice.selected,.user-music-upload.selected){
+ background:var(--sk-night-selected)!important;
+ color:#fff!important;
+ border-color:#8fa5ff!important;
+ box-shadow:inset 0 0 0 1px #8297ed!important;
+}
+:root[data-sk-theme="dark"] .user-music-upload{
+ background:var(--sk-night-surface)!important;
+ border:1px dashed #6a7d9f!important;
+}
+:root[data-sk-theme="dark"] :is(.user-music-upload>label,.user-music-upload>label>strong,
+ .user-music-upload>label>span,.music-choice strong,.no-music,.voice-listen strong,
+ .gemini-connect-card strong,.selected-music-title,.panel-label strong){
+ color:var(--sk-night-text)!important;opacity:1!important;
+}
+:root[data-sk-theme="dark"] :is(.music-intro,.builtin-license,.music-choice small,.voice-listen p,
+ .voice-preview-help,.gemini-connect-card p,.user-music-upload>label>span,
+ .music-actions button,.selected-music small,.connection-note p){
+ color:var(--sk-night-muted)!important;opacity:1!important;
+}
+:root[data-sk-theme="dark"] .copyright-notice{
+ background:#29374e!important;
+ color:#d8e4fa!important;
+ border:1px solid #526581!important;
+}
+:root[data-sk-theme="dark"] .user-music-upload input[type="file"]{
+ background:#152139!important;color:#eaf1ff!important;border-color:#617495!important;
+}
+:root[data-sk-theme="dark"] :is(.user-music-upload>label>svg,.wave-icon,.gemini-symbol svg,
+ .upload-icon svg,.music-preview-button svg,.round-button svg){
+ color:#b1c4ff!important;
+}
+:root[data-sk-theme="dark"] :is(.music-preview-button,.round-button,.upload-icon,.gemini-symbol){
+ background:#304464!important;
+ border:1px solid #536987!important;
+}
+:root[data-sk-theme="dark"] :is(.style-card,.effect-choice,.outline-choice,.basic-font-choice){
+ background:var(--sk-night-raised)!important;border-color:var(--sk-night-border)!important;
+}
+:root[data-sk-theme="dark"] :is(.style-card.selected,.effect-choice.selected,
+ .outline-choice.selected,.basic-font-choice.selected){
+ background:var(--sk-night-selected)!important;border-color:#8fa5ff!important;
+}
+:root[data-sk-theme="dark"] :is(.style-card>strong,.effect-choice>strong,
+ .outline-choice>strong,.basic-font-choice>strong){color:var(--sk-night-text)!important}
+:root[data-sk-theme="dark"] :is(.style-card small,.effect-description,
+ .outline-description,.basic-font-choice>span:last-of-type){color:var(--sk-night-muted)!important}
+:root[data-sk-theme="dark"] :is(.segmented,.guest-demo-styles,.guest-demo-categories){
+ background:#142037!important;border-color:var(--sk-night-border)!important;
+}
+:root[data-sk-theme="dark"] .segmented label:not(.selected){
+ background:transparent!important;color:#bfcee7!important;
+}
+:root[data-sk-theme="dark"] .segmented label.selected{
+ background:var(--sk-night-selected)!important;color:#fff!important;
+}
+:root[data-sk-theme="dark"] :is(.short-caption-audio-options,.short-caption-cue-time button,
+ .short-caption-cue-index,.short-caption-cue-position select){
+ background:var(--sk-night-raised)!important;color:var(--sk-night-text)!important;
+ border-color:var(--sk-night-border)!important;
+}
+:root[data-sk-theme="dark"] :is(.connection-error,.save-error){
+ background:#3c2c42!important;color:#ffd9df!important;border-color:#89566a!important;
+}
