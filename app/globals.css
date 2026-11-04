@@ -1136,3 +1136,17 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .save-tools>a,.save-tools>button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:9px 10px;font-size:12px;line-height:1.3}
  .save-tools .usage-chip{min-height:44px;display:inline-flex;align-items:center}
 }
+
+/* Mobile header QA: prevent Korean brand wrapping and vertically align utility actions. */
+@media(max-width:700px){
+ .topbar{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;min-width:0}
+ .topbar .brand.v2-brand-button{display:inline-flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start;flex:0 0 auto;min-width:94px;max-width:max-content;white-space:nowrap!important}
+ .topbar .brand.v2-brand-button>strong{display:inline-flex!important;flex-direction:row!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;writing-mode:horizontal-tb!important;flex:0 0 auto;font-size:19px;letter-spacing:-.4px}
+ .topbar .brand.v2-brand-button>strong>span{display:none}
+ .topbar .brand.v2-brand-button .brand-icon{flex:0 0 34px;min-width:34px}
+ .topbar .top-actions{flex:1 1 auto;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;justify-content:flex-end;flex-wrap:nowrap}
+ .topbar .top-actions::-webkit-scrollbar{display:none}
+ .save-tools{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+ .save-tools>a,.save-tools>button,.save-tools>.usage-chip{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;align-self:stretch;min-height:44px;margin:0;padding:9px 10px;font-size:12px;line-height:1.3;vertical-align:middle}
+ .save-tools>a{white-space:nowrap}
+}
