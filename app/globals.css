@@ -1238,3 +1238,52 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
 :root[data-sk-theme="dark"] video,
 :root[data-sk-theme="dark"] img,
 :root[data-sk-theme="dark"] canvas{filter:none!important}
+
+/* Dark-mode contrast QA: studio subtitle selection, segmented controls and caption settings. */
+:root[data-sk-theme="dark"] :is(
+ .effect-choice,.basic-font-choice,.outline-choice,.effect-settings,.basic-font-settings,
+ .outline-settings,.style-grid,.effect-choices,.basic-font-choices,.outline-choices,
+ .segmented,.settings-block,.short-caption-cue,.short-caption-cues,
+ .v2-quick-card,.scene-editor,.form-grid,.voice-preview-help
+){border-color:#40516b!important;color:#eaf1ff!important}
+:root[data-sk-theme="dark"] :is(.effect-choice,.basic-font-choice,.outline-choice){
+ background:#202e47!important;color:#f0f5ff!important;box-shadow:none!important
+}
+:root[data-sk-theme="dark"] :is(.effect-choice.selected,.basic-font-choice.selected,.outline-choice.selected){
+ background:#253a62!important;border-color:#809aff!important;box-shadow:0 0 0 1px #809aff!important
+}
+:root[data-sk-theme="dark"] :is(
+ .effect-choice>strong,.basic-font-choice>strong,.outline-choice>strong,
+ .style-card>strong,.effect-settings>.field-label,.basic-font-settings>.field-label,
+ .outline-settings>.field-label,.field-label,.settings-block>.field-label,
+ .style-card small,.size-label,.effect-choice .effect-description
+){color:#f2f6ff!important;opacity:1!important}
+:root[data-sk-theme="dark"] :is(
+ .effect-description,.outline-description,.basic-font-choice>span:last-of-type,
+ .effect-future,.voice-preview-help,.style-card small
+){color:#b6c6e2!important;opacity:1!important}
+:root[data-sk-theme="dark"] .effect-swatch{background:#22314c!important}
+:root[data-sk-theme="dark"] .basic-font-swatch{background:#2b3d58!important;color:#e8efff!important}
+:root[data-sk-theme="dark"] .outline-swatch{background:#455674!important}
+:root[data-sk-theme="dark"] .segmented{background:#121e33!important;border:1px solid #435471!important}
+:root[data-sk-theme="dark"] .segmented label{
+ background:transparent!important;color:#bac9e0!important;box-shadow:none!important;
+ min-height:44px;opacity:1!important
+}
+:root[data-sk-theme="dark"] .segmented label.selected{
+ background:#344976!important;color:#fff!important;box-shadow:0 2px 10px #0004!important;
+ font-weight:800!important
+}
+:root[data-sk-theme="dark"] :is(.effect-check,.style-check,.outline-check,.basic-font-check){color:#b3c7ff!important}
+:root[data-sk-theme="dark"] .size-control{color:#d6e1f5!important}
+:root[data-sk-theme="dark"] .size-label>span{color:#9eafff!important}
+:root[data-sk-theme="dark"] :is(.help-text,.settings-block .help-text,.effect-settings .help-text,
+ .basic-font-settings .help-text,.outline-settings .help-text){color:#b8c8e2!important;opacity:1!important}
+:root[data-sk-theme="dark"] :is(.style-card,.effect-choice,.outline-choice,.basic-font-choice) strong{
+ color:#f0f5ff!important;opacity:1!important;text-shadow:none
+}
+:root[data-sk-theme="dark"] .style-card{background:#202e47!important;border-color:#40516b!important}
+:root[data-sk-theme="dark"] .style-card.selected{background:#253a62!important;border-color:#809aff!important}
+:root[data-sk-theme="dark"] .style-card .type-sample{background:#22314c!important}
+:root[data-sk-theme="dark"] .settings-block{background:#19253c!important}
+:root[data-sk-theme="dark"] :is(.effect-choice,.style-card,.segmented label,.outline-choice,.basic-font-choice){transition:background .15s,color .15s,border-color .15s}
