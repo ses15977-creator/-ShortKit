@@ -1117,3 +1117,22 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
 .v2-entry-next>span{font-size:13px;font-weight:750;color:#586a8d}
 .v2-entry-next .primary{min-width:160px;min-height:52px;touch-action:manipulation}
 @media(max-width:700px){.v2-entry-next{align-items:stretch;flex-direction:column;gap:10px}.v2-entry-next .primary{width:100%}.v2-mode-card.selected .v2-mode-kicker{right:14px;top:46px}}
+
+/* Mobile header alignment: keep brand lettering horizontal and action baselines uniform. */
+.topbar .brand.v2-brand-button{display:inline-flex;flex-direction:row;flex-wrap:nowrap;align-items:center;white-space:nowrap;min-width:0;flex-shrink:0}
+.topbar .brand.v2-brand-button>strong{display:inline-flex;flex-direction:row;flex-wrap:nowrap;align-items:center;white-space:nowrap;word-break:keep-all;line-height:1.2;flex-shrink:0}
+.topbar .brand.v2-brand-button .brand-icon{flex-shrink:0}
+.save-tools{align-items:center}
+.save-tools>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;line-height:1.25;border:1px solid #dce3e7;border-radius:10px;white-space:nowrap;vertical-align:middle}
+.save-tools>button{min-height:44px;line-height:1.25}
+@media(max-width:700px){
+ .topbar{gap:6px;padding-left:12px;padding-right:12px}
+ .topbar .brand.v2-brand-button{gap:6px}
+ .topbar .brand.v2-brand-button>strong{font-size:19px;letter-spacing:-.4px;writing-mode:horizontal-tb}
+ .topbar .brand.v2-brand-button .v2-build-badge{display:none}
+ .topbar .brand.v2-brand-button .brand-icon{width:34px;height:34px}
+ .topbar .top-actions{min-width:0;justify-content:flex-end}
+ .save-tools{gap:8px;align-items:center}
+ .save-tools>a,.save-tools>button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:9px 10px;font-size:12px;line-height:1.3}
+ .save-tools .usage-chip{min-height:44px;display:inline-flex;align-items:center}
+}
