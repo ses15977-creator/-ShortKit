@@ -1107,3 +1107,13 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .guest-demo-footer{padding:18px 15px;display:grid;gap:12px}
  .guest-demo-footer a{display:inline-block}
 }
+
+/* Explicit mode selection and separate Next action. */
+.v2-mode-card.selected{border:2px solid #344cf0!important;box-shadow:0 0 0 3px #344cf022,0 12px 30px #1723370a}
+.v2-mode-card.selected:after{content:'✓ 선택됨';position:absolute;top:20px;right:20px;border-radius:999px;background:#243feb;color:white;font-weight:850;font-size:11px;padding:6px 10px}
+.v2-mode-card.selected .v2-mode-kicker{right:20px;top:55px}
+.v2-mode-card:focus-visible{outline:3px solid #879cff;outline-offset:3px}
+.v2-entry-next{display:flex;align-items:center;justify-content:flex-end;gap:18px;margin-top:24px;padding-top:20px;border-top:1px solid #e0e6f4}
+.v2-entry-next>span{font-size:13px;font-weight:750;color:#586a8d}
+.v2-entry-next .primary{min-width:160px;min-height:52px;touch-action:manipulation}
+@media(max-width:700px){.v2-entry-next{align-items:stretch;flex-direction:column;gap:10px}.v2-entry-next .primary{width:100%}.v2-mode-card.selected .v2-mode-kicker{right:14px;top:46px}}
