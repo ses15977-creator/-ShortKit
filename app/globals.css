@@ -959,3 +959,10 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
  .landing-footer{padding:24px 19px;gap:15px}
  .landing-footer a{margin-left:0}
 }
+
+/* Functional visitor preview: native player controls on PC and mobile. */
+.landing-mock-screen-player{aspect-ratio:9/12;background:#111827;display:block;overflow:hidden}
+.landing-mock-screen-player video{display:block;width:100%;height:100%;object-fit:contain;background:#101827;touch-action:auto}
+.landing-preview-player{display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0;background:#101827;min-height:300px;height:auto}
+.landing-preview-player video{display:block;width:100%;height:min(54vw,410px);min-height:300px;object-fit:contain;background:#101827;touch-action:auto}
+@media(max-width:760px){.landing-preview-player video{height:auto;min-height:250px;max-height:460px;aspect-ratio:9/13}}
