@@ -830,3 +830,19 @@ body{background:linear-gradient(180deg,#fbfcff 0,#f5f7fb 54%,#f7f9fc 100%);color
   .short-caption-launch.visual .short-caption-icon {width:38px;height:38px}
   .short-caption-text strong {font-size:15px}
 }
+
+
+/* Mobile QA: keep place lookup and quick-create inputs inside phone viewport */
+@media (max-width: 640px) {
+  .v2-quick-place-wrap,.v2-quick-place-wrap > .place-search,
+  .place-search,.place-search-form,.v2-place-fields,.v2-place-fields label,
+  .v2-quick-content,.v2-quick-card {min-width:0;max-width:100%;box-sizing:border-box}
+  .place-search-form {display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+  .place-search-form input {display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+  .place-search-form button {display:flex;justify-content:center;width:100%;min-width:0;white-space:normal}
+  .v2-place-fields {grid-template-columns:minmax(0,1fr)}
+  .v2-place-fields input {display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+  .place-search .help-text,.place-search .panel-label,.v2-quick-content p {overflow-wrap:anywhere}
+  .v2-quick-section {grid-template-columns:32px minmax(0,1fr)}
+  .v2-quick-place-wrap > .place-search {padding:14px}
+}
