@@ -20,6 +20,7 @@ import {categories,freshProject,ending,localScenes,makeCover,duration,sceneAt,ba
 import {saveProject,listProjects,restoreProject,releaseProject} from '@/lib/shortkit/storage';
 import {readAsset,drawScene,renderMovie,waitEvent,loadSubtitleFont} from '@/lib/shortkit/media';
 const steps=['콘텐츠','자막','음성/배경음','자료 추가','미리보기'];
+const isDesktopPreview=()=>typeof window!=='undefined'&&new URLSearchParams(window.location.search).has('sk-desktop-preview');
 const iconMap={utensils:Utensils,package:Package,plane:Plane,bulb:Lightbulb};
 const quickCategoryPhotos={
  food:'https://images.unsplash.com/photo-1769558688746-7ac36d8ce999?auto=format&fit=crop&fm=jpg&q=82&w=1600',
@@ -57,10 +58,17 @@ useEffect(()=>{try{const raw=localStorage.getItem(`shortkit:my-video-templates:$
 useEffect(()=>{const valid=readBrandPresetStorage(scope);setBrandPresets(valid);try{const stored=localStorage.getItem(`shortkit:default-brand-preset:${scope}`);if(stored&&valid.some(x=>x.id===stored))setDefaultBrandPresetId(stored);else{setDefaultBrandPresetId(null);if(stored)localStorage.removeItem(`shortkit:default-brand-preset:${scope}`);}}catch{setDefaultBrandPresetId(null);}},[scope]);
 useEffect(()=>{
  let mode:'sidebar'|'top'='sidebar';
- try{if(localStorage.getItem('shortkit:nav-layout')==='top')mode='top';}catch{}
+ if(isDesktopPreview()){
+  document.documentElement.setAttribute('data-sk-desktop-preview','1');
+  setSidebarLayout(true);
+  setCreationMode('manual');
+  setStep(1);
+ }else{
+  try{if(localStorage.getItem('shortkit:nav-layout')==='top')mode='top';}catch{}
+ }
  setSidebarLayout(mode==='sidebar');
  document.documentElement.setAttribute('data-sk-layout',mode);
- return()=>{document.documentElement.removeAttribute('data-sk-layout');document.documentElement.removeAttribute('data-sk-drawer');};
+ return()=>{document.documentElement.removeAttribute('data-sk-layout');document.documentElement.removeAttribute('data-sk-drawer');document.documentElement.removeAttribute('data-sk-desktop-preview');};
 },[]);
 useEffect(()=>{document.documentElement.setAttribute('data-sk-drawer',sidebarOpen?'open':'closed');},[sidebarOpen]);
 const toggleNavLayout=()=>{
@@ -115,8 +123,8 @@ useEffect(()=>{
  raf=requestAnimationFrame(tick);
  return()=>cancelAnimationFrame(raf);
 },[contentMode,shortCaptionOpen,shortCaptionAsset,shortCaptionCues]);
-useEffect(()=>{if(!p||draft||!storageReady)return;let active=true;setSaveStatus('변경사항 저장 대기 중…');const timer=setTimeout(()=>{setSaveStatus('저장 중…');saveProject(scope,p,true).then(()=>{if(mounted.current&&active){lastPersistedUpdated.current=p.updated;setLastSavedAt(Date.now());setSaveStatus('이 기기에 자동 저장됨');setSaveError('');}}).catch(e=>{if(active){setSaveStatus('자동 저장 실패');setSaveError(errorText(e));}});},1500);return()=>{active=false;clearTimeout(timer);};},[p,scope,draft,storageReady]);
-useEffect(()=>{function persistNow(){const current=latestProject.current;if(!current||draft||!storageReady||current.updated<=lastPersistedUpdated.current)return;saveProject(scope,current,true).then(()=>{lastPersistedUpdated.current=current.updated;if(mounted.current){setLastSavedAt(Date.now());setSaveStatus('이 기기에 자동 저장됨');setSaveError('');}}).catch(e=>{if(mounted.current){setSaveStatus('자동 저장 실패');setSaveError(errorText(e));}});}function visibility(){if(document.visibilityState==='hidden')persistNow();}function beforeUnload(e:BeforeUnloadEvent){const current=latestProject.current;if(!draft&&current&&current.updated>lastPersistedUpdated.current){e.preventDefault();e.returnValue='';}}document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',persistNow);window.addEventListener('beforeunload',beforeUnload);return()=>{document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',persistNow);window.removeEventListener('beforeunload',beforeUnload);};},[scope,draft,storageReady]);
+useEffect(()=>{if(isDesktopPreview()||!p||draft||!storageReady)return;let active=true;setSaveStatus('변경사항 저장 대기 중…');const timer=setTimeout(()=>{setSaveStatus('저장 중…');saveProject(scope,p,true).then(()=>{if(mounted.current&&active){lastPersistedUpdated.current=p.updated;setLastSavedAt(Date.now());setSaveStatus('이 기기에 자동 저장됨');setSaveError('');}}).catch(e=>{if(active){setSaveStatus('자동 저장 실패');setSaveError(errorText(e));}});},1500);return()=>{active=false;clearTimeout(timer);};},[p,scope,draft,storageReady]);
+useEffect(()=>{if(isDesktopPreview())return;function persistNow(){const current=latestProject.current;if(!current||draft||!storageReady||current.updated<=lastPersistedUpdated.current)return;saveProject(scope,current,true).then(()=>{lastPersistedUpdated.current=current.updated;if(mounted.current){setLastSavedAt(Date.now());setSaveStatus('이 기기에 자동 저장됨');setSaveError('');}}).catch(e=>{if(mounted.current){setSaveStatus('자동 저장 실패');setSaveError(errorText(e));}});}function visibility(){if(document.visibilityState==='hidden')persistNow();}function beforeUnload(e:BeforeUnloadEvent){const current=latestProject.current;if(!draft&&current&&current.updated>lastPersistedUpdated.current){e.preventDefault();e.returnValue='';}}document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',persistNow);window.addEventListener('beforeunload',beforeUnload);return()=>{document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',persistNow);window.removeEventListener('beforeunload',beforeUnload);};},[scope,draft,storageReady]);
 useEffect(()=>{if(!p)return;setOutput(old=>{if(old)URL.revokeObjectURL(old.url);return null;});setVideoDownloaded(false);setPublishPackageCopied(false);},[p]);
 useEffect(()=>{setOutput(old=>{if(old)URL.revokeObjectURL(old.url);return null;});setVideoDownloaded(false);setPublishPackageCopied(false);},[exportPreset,format]);
 useEffect(()=>{if(!p)return;const context=(document as unknown as {modelContext?:{registerTool:(tool:unknown,options:unknown)=>Promise<void>}}).modelContext;if(!context)return;const lifecycle=new AbortController();Promise.resolve(context.registerTool({name:'read_shortkit_project',description:'Read the current Shortkit project settings and editable scene scripts.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>({name:p.name,category:p.category,scenes:p.scenes.map(({id,role,text,narration,duration})=>({id,role,text,narration,duration})),caption:p.caption})},{signal:lifecycle.signal})).catch(()=>{});return()=>lifecycle.abort();},[p]);
