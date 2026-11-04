@@ -5,6 +5,7 @@ import "@fontsource/nanum-pen-script/400.css";
 import "@fontsource/gamja-flower/400.css";
 import "./globals.css";
 import ThemeSwitch from "./theme-switch";
+import DesktopPreview from "./desktop-preview";
 
 export const metadata: Metadata = {
   title: "숏킷 · SNS 영상 만들기",
@@ -25,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased">{children}<ThemeSwitch/></body>
+      <body className="antialiased">{children}<ThemeSwitch/><DesktopPreview/></body>
     </html>
   );
 }
