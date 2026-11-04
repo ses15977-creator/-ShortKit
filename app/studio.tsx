@@ -7,7 +7,7 @@ import {projectBackup,readBackup} from '@/lib/shortkit/backup';
 import WatermarkSettings from './watermark-settings';
 import {loadWatermark,type Watermark,defaultWatermark} from '@/lib/shortkit/watermark';
 import AudioSettings,{type ConnectionState} from './audio-settings';
-import {Film,Plus,FolderOpen,Save,Check,Utensils,Package,Plane,Lightbulb,Type,Flame,Mic,Upload,Play,Pause,RotateCcw,RotateCw,Trash2,ChevronLeft,ChevronRight,ChevronDown,Download,Copy,Sparkles,WandSparkles,Volume2,Music,Scissors,Smartphone,Loader2,Square,Undo2,ImagePlus,GripVertical,ArrowUp,ArrowDown,RefreshCw,WifiOff,ShieldCheck,PanelLeft,PanelTop,Menu,X} from 'lucide-react';
+import {Film,Plus,FolderOpen,Save,Check,Utensils,Package,Plane,Lightbulb,Type,Flame,Mic,Upload,Play,Pause,RotateCcw,RotateCw,Trash2,ChevronLeft,ChevronRight,ChevronDown,Download,Copy,Sparkles,WandSparkles,Volume2,Music,Scissors,Smartphone,Loader2,Square,Undo2,ImagePlus,GripVertical,ArrowUp,ArrowDown,RefreshCw,WifiOff,ShieldCheck,PanelLeft,PanelTop,Menu,X,Monitor,SunMoon} from 'lucide-react';
 import {RadioGroup,RadioGroupItem} from '@/components/ui/radio-group';
 import {Slider} from '@/components/ui/slider';
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '@/components/ui/dialog';
@@ -85,7 +85,7 @@ const toggleNavLayout=()=>{
  document.documentElement.setAttribute('data-sk-layout',next);
  try{localStorage.setItem('shortkit:nav-layout',next);}catch{}
 };
-const navigationExtras=<><button type="button" className="sk-sidebar-close" onClick={()=>setSidebarOpen(false)} aria-label="메뉴 닫기"><X size={19}/></button><button type="button" className="sk-layout-switch" onClick={toggleNavLayout}>{sidebarLayout?<PanelTop size={17}/>:<PanelLeft size={17}/>}<span>{sidebarLayout?'상단 메뉴로 보기':'왼쪽 메뉴로 보기'}</span></button></>;
+const navigationExtras=<><button type="button" className="sk-sidebar-close" onClick={()=>setSidebarOpen(false)} aria-label="메뉴 닫기"><X size={19}/></button><div className="sk-sidebar-mobile-tools"><button type="button" onClick={()=>{setSidebarOpen(false);document.querySelector<HTMLButtonElement>('.sk-desktop-preview-open')?.click();}}><Monitor size={17}/><span>PC 화면 미리보기</span></button><button type="button" onClick={()=>document.querySelector<HTMLButtonElement>('.sk-theme-toggle')?.click()}><SunMoon size={17}/><span>주간 / 야간모드 전환</span></button></div><button type="button" className="sk-layout-switch" onClick={toggleNavLayout}>{sidebarLayout?<PanelTop size={17}/>:<PanelLeft size={17}/>}<span>{sidebarLayout?'상단 메뉴로 보기':'왼쪽 메뉴로 보기'}</span></button></>;
 const sidebarTrigger=<><button type="button" className="sk-side-opener" aria-label="메뉴 열기" aria-expanded={sidebarOpen} onClick={()=>setSidebarOpen(v=>!v)}><Menu size={21}/><span>메뉴</span></button>{sidebarOpen&&<button type="button" className="sk-sidebar-scrim" aria-label="메뉴 닫기" onClick={()=>setSidebarOpen(false)}/>}</>;
 useEffect(()=>{latestProject.current=p;},[p]);
 useEffect(()=>{
