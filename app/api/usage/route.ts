@@ -1,4 +1,4 @@
 import {getSiteUser} from '../../site-auth';
 import {usageStatus} from '@/lib/shortkit/shared-quota';
 export const dynamic='force-dynamic';
-export async function GET(request:Request){try{const user=await getSiteUser();const status=await usageStatus(request,user?.userId,user?.email);return Response.json(status.owner?status:{owner:false},{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'사용량을 확인하지 못했습니다.'},{status:503,headers:{'Cache-Control':'no-store'}});}}
+export async function GET(request:Request){try{const user=await getSiteUser();if(process.env.SHORTKIT_REQUIRE_LOGIN==='1'&&user?.provider!=='google')return Response.json({error:'로그인이 필요합니다.'},{status:401,headers:{'Cache-Control':'no-store'}});const status=await usageStatus(request,user?.userId,user?.email);return Response.json(status.owner?status:{owner:false},{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'사용량을 확인하지 못했습니다.'},{status:503,headers:{'Cache-Control':'no-store'}});}}
