@@ -1,7 +1,6 @@
 import Studio from './studio';
 import {getSiteUser,registerMember} from './site-auth';
 import GuideWelcome from './welcome-guide';
-import Link from 'next/link';
 import {googleEnabled} from '@/lib/shortkit/google-auth';
 import {redirect} from 'next/navigation';
 export const dynamic='force-dynamic';
@@ -16,9 +15,10 @@ export default async function Page(){
       {user?<>
         <span>{user.displayName}님 · {user.email}</span>
         {user.provider==='google'&&<a href="/api/auth/logout">로그아웃</a>}
-      </>:<Link href="/login">로그인 · 회원가입</Link>}
+      </>:<a href="https://shortkit.kr/login">로그인 · 회원가입</a>}
     </div>}
+    {!user&&enabled&&<div className="mobile-login-notice"><strong>ShortKit을 시작하려면 Google 계정으로 로그인해 주세요.</strong><a href="https://shortkit.kr/login">Google 로그인 · 회원가입</a></div>}
     <Studio scope={user?.userId||'device'}/>
-    <GuideWelcome/>
+    {user&&<GuideWelcome/>}
   </>;
 }
