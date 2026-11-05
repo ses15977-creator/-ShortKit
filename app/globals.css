@@ -3123,3 +3123,29 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
 @media(max-width:1099px){
  .sk-sidebar-desktop-layout-switch{display:none!important}
 }
+
+/* Direct-production stage list: avoid the tiny nested scrollbar. The full sidebar,
+   not the five-stage list, is the only scroll container on desktop. */
+@media(min-width:1100px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar .sk-sidebar-stage-group{
+  position:static!important;flex:0 0 auto!important;
+  display:flex!important;flex-direction:column!important;
+  height:auto!important;max-height:none!important;min-height:0!important;
+  overflow:visible!important;overflow-y:visible!important;
+  padding-bottom:8px!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar .sk-sidebar-stage-group .steps{
+  position:static!important;inset:auto!important;top:auto!important;
+  bottom:auto!important;left:auto!important;right:auto!important;
+  display:flex!important;flex-direction:column!important;flex:0 0 auto!important;
+  width:100%!important;height:auto!important;min-height:0!important;
+  max-height:none!important;max-width:100%!important;
+  overflow:visible!important;overflow-y:visible!important;
+  padding:0!important;margin:0!important;gap:5px!important;
+  border:0!important;background:transparent!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar .sk-sidebar-stage-group .steps>button{
+  position:relative!important;flex:0 0 auto!important;
+  height:42px!important;min-height:42px!important;
+ }
+}
