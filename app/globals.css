@@ -2806,3 +2806,81 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
   background:#253750!important;color:#eef3ff!important;border-color:#4f658b!important;
  }
 }
+
+/* 2026-11-05: Top navigation layout switch must occupy its own normal-flow row.
+   Fixes overlap with quick-create header and actions on PC, tablets, and phones. */
+:root[data-sk-layout="top"] body:has(.topbar) .topbar{
+ box-sizing:border-box!important;
+ height:auto!important;min-height:90px!important;
+ display:flex!important;flex-direction:row!important;
+ flex-wrap:wrap!important;align-items:center!important;
+ justify-content:space-between!important;
+ column-gap:14px!important;row-gap:9px!important;
+ padding:12px clamp(14px,3vw,30px) 14px!important;
+ overflow:visible!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar .brand.v2-brand-button{
+ order:0!important;flex:0 0 auto!important;max-width:100%!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions{
+ order:1!important;flex:0 1 auto!important;min-width:0!important;
+ display:flex!important;align-items:center!important;
+ flex-direction:row!important;flex-wrap:wrap!important;
+ gap:7px!important;justify-content:flex-end!important;
+ overflow:visible!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar:after{
+ content:"";display:block!important;order:2!important;
+ flex:0 0 100%!important;height:0!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar .sk-layout-switch{
+ position:static!important;inset:auto!important;
+ order:3!important;flex:0 0 auto!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;width:max-content!important;max-width:100%!important;
+ min-height:42px!important;height:auto!important;
+ margin:0!important;padding:9px 14px!important;
+ background:#263a5b!important;color:#f5f7ff!important;
+ border:1px solid #62759e!important;border-radius:11px!important;
+ font-size:12px!important;line-height:1.25!important;font-weight:850!important;
+ box-shadow:none!important;transform:none!important;
+ white-space:nowrap!important;z-index:1!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar .sk-layout-switch>span{
+ display:inline!important;color:inherit!important;white-space:nowrap!important;
+}
+:root[data-sk-layout="top"] body:has(.topbar) .topbar .sk-layout-switch:hover{
+ background:#38517b!important;color:#fff!important;
+}
+@media(max-width:1250px){
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar{
+  justify-content:flex-start!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions{
+  flex:1 1 100%!important;width:100%!important;justify-content:flex-start!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions>button,
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions>a{
+  width:auto!important;max-width:100%!important;
+  min-height:40px!important;height:auto!important;padding:9px 12px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  white-space:nowrap!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions>button>span{
+  display:inline!important;white-space:nowrap!important;
+ }
+}
+@media(max-width:480px){
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar{
+  padding:11px 14px 13px!important;gap:8px!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .brand.v2-brand-button{
+  max-width:100%!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .top-actions{
+  gap:6px!important;
+ }
+ :root[data-sk-layout="top"] body:has(.topbar) .topbar .sk-layout-switch{
+  width:auto!important;
+ }
+}
