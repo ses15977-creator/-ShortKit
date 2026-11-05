@@ -3010,3 +3010,63 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
 :root[data-sk-theme="light"][data-sk-layout="sidebar"] .sk-ai-sidebar-progress>div:first-child,
 :root[data-sk-theme="light"][data-sk-layout="sidebar"] .sk-ai-sidebar-progress p{color:#405778}
 :root[data-sk-theme="light"][data-sk-layout="sidebar"] .sk-ai-sidebar-meter{background:#cad5eb}
+
+/* 2026-11-05: Sidebar footer collision fix.
+   Reserve an actual independent footer zone for the fixed theme control so neither
+   AI progress / recent-project buttons nor the layout switch can scroll behind it. */
+@media(min-width:1100px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar{
+  position:fixed!important;
+  top:0!important;bottom:74px!important;
+  height:calc(100dvh - 74px)!important;
+  max-height:calc(100dvh - 74px)!important;
+  box-sizing:border-box!important;
+  padding-bottom:18px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin!important;
+ }
+ /* Only the outer sidebar scrolls. A nested scroll made its footer overlap. */
+ :root[data-sk-layout="sidebar"] .topbar .sk-ai-sidebar{
+  flex:0 0 auto!important;min-height:0!important;
+  max-height:none!important;overflow:visible!important;
+  width:100%!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar:has(.sk-ai-sidebar) .sk-layout-switch{
+  order:3!important;flex:0 0 auto!important;
+  margin:9px 0 0!important;
+  width:100%!important;
+  min-height:42px!important;
+  opacity:1!important;
+ }
+ /* Pinned footer gets its own solid background to avoid ghosted UI underneath. */
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .sk-theme-toggle{
+  position:fixed!important;
+  left:17px!important;bottom:12px!important;right:auto!important;
+  z-index:160!important;
+  width:224px!important;height:46px!important;min-height:46px!important;
+  box-sizing:border-box!important;
+  background:#282447!important;border:1px solid #6155a1!important;
+  color:#f3f0ff!important;box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .sk-theme-toggle{
+  background:#e5e2ff!important;color:#443486!important;
+  border:1px solid #b9b0ea!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] body:has(.topbar) .sk-theme-toggle{
+  background:#302b60!important;color:#f3f0ff!important;
+  border:1px solid #6155a1!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar):after{
+  content:"";pointer-events:none;
+  position:fixed;left:0;bottom:0;width:258px;height:74px;z-index:90;
+  background:#141e32;border-top:1px solid #384764;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar):after{
+  background:#eef3fb;border-top-color:#cbd5e7;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-ai-sidebar-progress{
+  flex:0 0 auto!important;
+ }
+}
