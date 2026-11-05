@@ -2662,3 +2662,147 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
   min-height:36px!important;height:36px!important;
  }
 }
+
+/* Mobile drawer correction 2026-11-05: keep the top-layout switch visible and
+   make the drawer itself follow light/dark mode. Tablet and PC rules stay intact. */
+@media(max-width:649px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar{
+  gap:12px!important;padding:17px 15px 20px!important;
+  box-sizing:border-box!important;background:#141e32!important;
+  background-image:linear-gradient(165deg,#19243b,#101827 82%)!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-close{
+  order:0!important;align-self:flex-end!important;
+  flex:0 0 37px!important;width:37px!important;height:37px!important;
+  border-radius:10px!important;align-items:center!important;justify-content:center!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .brand.v2-brand-button{
+  order:1!important;flex:0 0 auto!important;
+ }
+ /* Make this important escape route visible at the top, never at the bottom of a scroll. */
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch{
+  order:2!important;display:flex!important;flex:0 0 46px!important;
+  width:100%!important;min-height:46px!important;height:46px!important;
+  margin:0!important;padding:9px 12px!important;
+  justify-content:flex-start!important;gap:10px!important;
+  background:#2d3d60!important;background-image:none!important;
+  color:#f5f7ff!important;border:1px solid #697ba8!important;
+  border-radius:11px!important;opacity:1!important;
+  font-weight:800!important;font-size:13px!important;
+  text-shadow:none!important;box-shadow:none!important;
+  white-space:nowrap!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch>span{
+  display:inline!important;color:inherit!important;
+  font-weight:800!important;font-size:13px!important;opacity:1!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-layout-switch>svg{
+  color:inherit!important;stroke:currentColor!important;opacity:1!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .top-actions{
+  order:3!important;flex:0 0 auto!important;
+  margin:0!important;padding-bottom:11px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-stage-group{
+  order:4!important;flex:0 0 auto!important;
+  margin:0!important;padding-top:12px!important;
+ }
+ :root[data-sk-layout="sidebar"] .topbar .sk-sidebar-mobile-tools{
+  order:5!important;flex:0 0 auto!important;
+  margin:0!important;padding-top:12px!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .topbar{
+  background:#f2f5fc!important;
+  background-image:linear-gradient(165deg,#f8faff,#eaf0fa)!important;
+  color:#273751!important;border-right:1px solid #cad5e6!important;
+  box-shadow:8px 0 28px #16253a24!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button>strong{
+  color:#203151!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .brand.v2-brand-button>strong>span{
+  color:#5744b0!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-close{
+  background:#e5ecf6!important;color:#304361!important;
+  border:1px solid #becce1!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-layout-switch{
+  background:#dcd9fc!important;color:#342879!important;
+  border:1px solid #b5aaf0!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-layout-switch>span{
+  color:#342879!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools{
+  border-color:#cbd5e7!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-heading{
+  color:#596c8c!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools>button{
+  background:#e3eaf5!important;background-image:none!important;
+  border:1px solid #c7d2e3!important;
+  color:#263a5d!important;box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button:disabled{
+  background:#e9eef7!important;border-color:#d8e0ed!important;
+  color:#7c8ca6!important;opacity:.7!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button svg,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a svg,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-mobile-tools svg{
+  color:inherit!important;stroke:currentColor!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>button:hover:not(:disabled),
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .top-actions>a:hover{
+  background:#d5def0!important;color:#253451!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.done{
+  background:#e5ecf7!important;border:1px solid #d0dced!important;
+  color:#3b5072!important;box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button>b{
+  color:inherit!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button>span{
+  background:#d1def0!important;color:#344f78!important;
+  border:1px solid #afc0dd!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.active,
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button[aria-current="step"]{
+  background:#e0dcff!important;border:1px solid #aea2f3!important;
+  color:#332670!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] .topbar .sk-sidebar-stage-group .steps>button.active>span{
+  background:#6451d6!important;color:#fff!important;border-color:#7563e9!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .top-actions>button,
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .top-actions>a{
+  background:#1f2e47!important;color:#e2ebfc!important;
+  border:1px solid #344864!important;box-shadow:none!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .top-actions>button:disabled{
+  background:#1b283e!important;color:#92a4c1!important;
+  border-color:#33415a!important;opacity:.65!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button:not(.active){
+  background:#253651!important;color:#e1ebfd!important;
+  border:1px solid #394f70!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button.done>span{
+  background:#3b5077!important;color:#fff!important;border-color:#617dac!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-stage-group .steps>button.active{
+  background:#483b80!important;color:#fff!important;border:1px solid #6858ad!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="dark"] .topbar .sk-sidebar-mobile-tools>button{
+  background:#253750!important;color:#eef3ff!important;border-color:#4f658b!important;
+ }
+}
