@@ -3070,3 +3070,56 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
   flex:0 0 auto!important;
  }
 }
+
+/* Stable, unified desktop sidebar footer. Both actions are pinned OUTSIDE the
+   scrollable navigation, regardless of screen/mode/content length. */
+.sk-sidebar-desktop-layout-switch{display:none}
+@media(min-width:1100px){
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar{
+  top:0!important;bottom:132px!important;
+  height:calc(100dvh - 132px)!important;max-height:calc(100dvh - 132px)!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  padding-bottom:15px!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .topbar .sk-layout-switch{
+  display:none!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .sk-sidebar-desktop-layout-switch{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;
+  position:fixed!important;left:17px!important;bottom:70px!important;z-index:161!important;
+  box-sizing:border-box!important;width:224px!important;height:46px!important;min-height:46px!important;
+  margin:0!important;padding:9px 12px!important;
+  border:1px solid #536581!important;border-radius:11px!important;
+  background:#263956!important;color:#eff3ff!important;
+  font-size:12px!important;font-weight:800!important;white-space:nowrap!important;
+  box-shadow:none!important;cursor:pointer;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .sk-sidebar-desktop-layout-switch:hover{
+  background:#364a6b!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .sk-sidebar-desktop-layout-switch:focus-visible{
+  outline:2px solid #8d85f2!important;outline-offset:2px!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar):after{
+  width:258px!important;height:132px!important;
+  background:#141e32!important;border-top:1px solid #3b4b68!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar):after{
+  background:#eef3fb!important;border-color:#cbd5e7!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .sk-sidebar-desktop-layout-switch{
+  background:#e2e9f5!important;color:#2a3d5b!important;
+  border-color:#c3cfe3!important;
+ }
+ :root[data-sk-layout="sidebar"][data-sk-theme="light"] body:has(.topbar) .sk-sidebar-desktop-layout-switch:hover{
+  background:#d6e0f0!important;color:#263753!important;
+ }
+ :root[data-sk-layout="sidebar"] body:has(.topbar) .sk-theme-toggle{
+  left:17px!important;bottom:12px!important;width:224px!important;
+  height:46px!important;z-index:162!important;
+ }
+}
+/* Narrow/tablet drawer retains its existing in-menu layout action. */
+@media(max-width:1099px){
+ .sk-sidebar-desktop-layout-switch{display:none!important}
+}
