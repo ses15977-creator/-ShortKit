@@ -29,7 +29,7 @@ const quickCategoryPhotos={
  product:'https://images.unsplash.com/photo-1737424064873-89db6803084a?auto=format&fit=crop&fm=jpg&q=82&w=1600',
  travel:'https://images.unsplash.com/photo-1660506392556-e51e04fc8cac?auto=format&fit=crop&fm=jpg&q=82&w=1600',
  info:'https://images.unsplash.com/photo-1758553173287-513ad13280b6?auto=format&fit=crop&fm=jpg&q=82&w=1600',
- shopping:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&fm=jpg&q=82&w=1600'
+ shopping:'https://images.unsplash.com/photo-1760565030243-c92ed557e8da?auto=format&fit=crop&fm=jpg&q=82&w=1600'
 } as const;
 const styleOptions=[{id:'gothic',label:'기본 서체',desc:'세 가지 서체로 나답게',sample:'짧게 담는 나의 이야기'},{id:'outline',label:'테두리 강조',desc:'어떤 배경에서도 또렷하게',sample:'시선을 잡는 한마디'},{id:'fire',label:'이펙트 강조',desc:'움직임으로 시선을 모으게',sample:'지금, 가장 뜨거운 순간'}];
 const videoTemplates=[
