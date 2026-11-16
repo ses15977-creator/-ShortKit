@@ -10,7 +10,7 @@ export type Category=typeof categories[number]['id'];
 export type ShoppingType='promo'|'review'|'sale';
 export interface ShoppingInfo {type:ShoppingType;price:string;salePrice:string;features:string;purchaseLink:string;promotionEnds:string;}
 export const defaultShoppingInfo=():ShoppingInfo=>({type:'promo',price:'',salePrice:'',features:'',purchaseLink:'',promotionEnds:''});
-export function shoppingPriceText(info?:ShoppingInfo){if(!info)return '';const amount=info.salePrice.trim()||info.price.trim();if(!amount)return '';return `가격 ${amount}원`+(info.salePrice.trim()&&info.price.trim()?` (정가 ${info.price.trim()}원)`:'');}
+export function shoppingPriceText(info?:ShoppingInfo){if(!info)return '';const amount=info.salePrice.trim()||info.price.trim();if(!amount)return '';const format=(n:string)=>Number(n).toLocaleString('ko-KR')+'원';return info.salePrice.trim()?(info.price.trim()?`할인가 ${format(info.salePrice)} (정가 ${format(info.price)})`:`판매가 ${format(info.salePrice)}`):`판매가 ${format(info.price)}`;}
 export function shoppingCta(p:Pick<Project,'cta'|'shopping'>){return p.cta==='comment'?'구매 정보는 고정댓글에서 확인하세요':'구매 정보는 프로필 링크에서 확인하세요';}
 export type SubtitlePosition='top'|'middle'|'bottom';
 export type SubtitleStyle='gothic'|'outline'|'fire';
@@ -28,12 +28,20 @@ export function makeCover(p:Project,hook:Scene):Scene{return {id:crypto.randomUU
 export function localScenes(p:Project):Scene[]{const facts=p.shopping?.features.split(/[,\n]/).map(x=>x.trim()).filter(Boolean)||[];const info=p.shopping;const price=shoppingPriceText(info);const base=p.assets.map((a,i)=>({id:crypto.randomUUID(),assetId:a.id,role:(i===0?'hook':'body') as Scene['role'],text:p.category==='shopping'?(i===0?(p.subject.trim()||'상품을 소개합니다'):i===1&&price?price:facts.length?facts[(i-1)%facts.length]:(p.subject.trim()||'상품 정보 확인')):'',narration:'',duration:a.kind==='video'?Math.min(5,a.duration):4,start:0,rotation:0,fit:'contain' as const}));if(base.length){base.push({...base[base.length-1],id:crypto.randomUUID(),role:'ending',text:ending(p),narration:ending(p),duration:4});base.unshift(makeCover(p,base[0]));}return base;}
 export function duration(p:Project){return p.scenes.reduce((n,s)=>n+s.duration,0);}
 export function sceneAt(p:Project,t:number){let offset=0;for(let i=0;i<p.scenes.length;i++){const scene=p.scenes[i];if(t<offset+scene.duration||i===p.scenes.length-1)return {scene,index:i,local:Math.max(0,t-offset),offset};offset+=scene.duration;}return null;}
-export function basicCaption(p:Project){const tag={food:'#맛집리뷰 #맛집추천',product:'#상품리뷰 #제품소개',travel:'#여행리뷰 #여행기록',info:'#정보공유 #꿀팁',shopping:'#쇼핑쇼츠 #상품소개 #쇼핑추천'}[p.category];return [p.subject,p.category==='shopping'?shoppingPriceText(p.shopping):'',p.category==='shopping'?p.shopping?.features||'':'',p.notes,...p.scenes.filter(s=>s.role!=='ending'&&s.role!=='cover').map(s=>s.text),ending(p),'',tag].filter((s,i,all)=>s===''||!!s&&all.indexOf(s)===i).join('\n');}
+export function basicCaption(p:Project){const tag={food:'#맛집리뷰 #맛집추천',product:'#상품리뷰 #제품소개',travel:'#여행리뷰 #여행기록',info:'#정보공유 #꿀팁',shopping:'#쇼핑쇼츠 #상품소개 #쇼핑추천'}[p.category];return [p.subject,p.category==='shopping'?shoppingPriceText(p.shopping):'',p.category==='shopping'?p.shopping?.features||'':'',p.category==='shopping'&&p.shopping?.purchaseLink?.startsWith('https://')?p.shopping.purchaseLink:'',p.notes,...p.scenes.filter(s=>s.role!=='ending'&&s.role!=='cover').map(s=>s.text),ending(p),'',tag].filter((s,i,all)=>s===''||!!s&&all.indexOf(s)===i).join('\n');}
 export function resetSceneAudio(s:Scene){return {...s,audio:undefined,audioUrl:undefined};}
 
 /** The same final text is used for the preview, clipboard, and text download. */
-export function captionForSharing(p:Pick<Project,'category'|'caption'|'subject'|'address'>){
- const body=p.caption.trim();if(p.category!=='food')return body;
+export function captionForSharing(p:Pick<Project,'category'|'caption'|'subject'|'address'|'shopping'>){
+ const body=p.caption.trim();if(p.category==='shopping'){
+  const extras:string[]=[];const link=p.shopping?.purchaseLink?.trim()||'';
+  const price=shoppingPriceText(p.shopping);
+  if(price&&!body.includes(price))extras.push(price);
+  if(p.shopping?.features?.trim()&&!body.includes(p.shopping.features.trim()))extras.push(p.shopping.features.trim());
+  if(link.startsWith('https://')&&!body.includes(link))extras.push('구매 링크: '+link);
+  return [body,...extras].filter(Boolean).join('\n\n');
+ }
+ if(p.category!=='food')return body;
  const normalize=(s:string)=>s.normalize('NFC').replace(/\s+/g,'').toLocaleLowerCase('ko-KR');
  const existing=normalize(body);const details:string[]=[];
  const name=p.subject.trim(),address=p.address.trim();
