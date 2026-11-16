@@ -3225,3 +3225,34 @@ body:has(.bottom-bar) .sk-theme-toggle{bottom:95px}
  .sk-shopping-inputs{grid-template-columns:minmax(0,1fr);gap:11px}
  .sk-shopping-inputs .sk-shopping-wide{grid-column:auto}
 }
+
+/* Shorts subtitles now sits directly beside Shopping Shorts in the manual category grid.
+   Keep the established full-photo category tile sizing and preserve the timeline editor. */
+.category-grid>.short-caption-launch.visual{
+ box-sizing:border-box!important;display:block!important;
+ position:relative!important;aspect-ratio:16/9!important;
+ min-height:0!important;width:100%!important;height:auto!important;
+ margin:0!important;padding:0!important;
+ border-radius:18px!important;overflow:hidden!important;
+ text-align:left!important;
+}
+.category-grid>.short-caption-launch.visual .short-caption-visual,
+.category-grid>.short-caption-launch.visual .short-caption-gradient{
+ position:absolute;inset:0;
+}
+.category-grid>.short-caption-launch.visual .short-caption-visual img{
+ width:100%!important;height:100%!important;object-fit:cover!important;
+}
+.category-grid>.short-caption-launch.visual .short-caption-copy{
+ z-index:2!important;
+}
+.category-grid>.short-caption-launch.visual.selected{
+ border:2px solid #6d63ff!important;
+ box-shadow:0 0 0 3px rgba(109,99,255,.18),0 16px 36px rgba(42,35,140,.22)!important;
+}
+.short-caption-entry:empty{display:none!important}
+@media(max-width:760px){
+ .category-grid>.short-caption-launch.visual{
+  aspect-ratio:16/9!important;min-height:0!important;
+ }
+}
