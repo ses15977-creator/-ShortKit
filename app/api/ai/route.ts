@@ -33,14 +33,14 @@ async function findAlternateTextModel(apiKey:string,primary:string):Promise<stri
 }
 async function generate(apiKey:string,model:string,body:unknown,allowTextFallback=false){
  const payload=JSON.stringify(body);
- const deadline=Date.now()+112000;
+ const deadline=Date.now()+(allowTextFallback?56000:112000);
  let currentModel=model;
  let fallbackChecked=false;
  const retries=allowTextFallback?3:2;
  for(let attempt=0;attempt<retries;attempt++){
   let r:Response;
   try{
-   r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(currentModel)}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':apiKey},body:payload,signal:AbortSignal.timeout(Math.max(1,Math.min(45000,deadline-Date.now())))});
+   r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(currentModel)}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':apiKey},body:payload,signal:AbortSignal.timeout(Math.max(1,Math.min(allowTextFallback?18000:45000,deadline-Date.now())))});
    if(r.ok){
     const data=await r.json() as {usageMetadata?:{promptTokenCount?:number;candidatesTokenCount?:number};candidates?:{content?:{parts?:{text?:string;inlineData?:{data:string;mimeType:string}}[]}}[]};
     return {...data,__shortkitModelUsed:currentModel};
