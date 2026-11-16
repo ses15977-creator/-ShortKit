@@ -48,6 +48,13 @@ async function generate(apiKey:string,model:string,body:unknown,allowTextFallbac
   }catch(e){
    if(e instanceof Error&&(e.name==='TimeoutError'||e.name==='AbortError')){
     console.error('AI generation timeout',{model:currentModel,attempt:attempt+1});
+    // A timeout can indicate the same overload as HTTP 503. Try a
+    // supported alternate model rather than retrying the stalled model.
+    if(allowTextFallback&&!fallbackChecked&&deadline-Date.now()>10000){
+     fallbackChecked=true;
+     const alternate=await findAlternateTextModel(apiKey,currentModel);
+     if(alternate){console.warn('Gemini timed out; switching to verified alternative',{from:currentModel,to:alternate});currentModel=alternate;}
+    }
     if(attempt+1<retries&&deadline-Date.now()>5000){await new Promise(resolve=>setTimeout(resolve,1200*(attempt+1)));continue;}
     throw new Error('Gemini 응답 대기 시간이 초과됐습니다. 현재 작업은 유지됩니다. 잠시 후 다시 시도해 주세요.');
    }
